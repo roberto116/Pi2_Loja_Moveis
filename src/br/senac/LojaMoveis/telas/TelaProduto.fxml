@@ -10,7 +10,7 @@
    <children>
       <TextField fx:id="tfProduto" layoutX="27.0" layoutY="37.0" prefHeight="25.0" prefWidth="173.0" promptText="Produto" />
       <TextField fx:id="tfCor" layoutX="27.0" layoutY="72.0" prefHeight="25.0" prefWidth="173.0" promptText="Cor" />
-      <TextField fx:id="tfQualidade" layoutX="27.0" layoutY="109.0" prefHeight="25.0" prefWidth="173.0" promptText="Qualidade" />
+      <TextField fx:id="tfMarca" layoutX="27.0" layoutY="109.0" prefHeight="25.0" prefWidth="173.0" promptText="Marca" />
       <TextField fx:id="tfQuantidade" layoutX="27.0" layoutY="147.0" prefHeight="25.0" prefWidth="173.0" promptText="Quantidades" />
       <TextField fx:id="tfValor" layoutX="27.0" layoutY="184.0" prefHeight="25.0" prefWidth="173.0" promptText="Valor" />
       <Button layoutX="61.0" layoutY="227.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="25.0" prefWidth="63.0" text="Limpar" />
@@ -21,8 +21,8 @@
         <columns>
           <TableColumn fx:id="colunaProduto" prefWidth="117.0" text="Produto" />
           <TableColumn fx:id="colunaCor" prefWidth="78.0" text="Cor" />
-            <TableColumn fx:id="colunaQualidade" prefWidth="72.0" text="Qualidade" />
-            <TableColumn fx:id="colunaQuantidade" text="Quantidade" />
+            <TableColumn fx:id="colunaMarca" text="Marca" />
+            <TableColumn fx:id="colunaQuantidade" prefWidth="72.0" text="Quantidade" />
             <TableColumn fx:id="colunaValor" prefWidth="73.0" text="Valor" />
         </columns>
       </TableView>

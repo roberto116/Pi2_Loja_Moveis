@@ -5,7 +5,7 @@
  */
 package br.senac.LojaMoveis.bd;
 
-import br.senac.LojaMoveis.registros.ItemProduto;
+import br.senac.LojaMoveis.registros.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ItemProdutoDAO {
     
-    public static void inserir(ItemProduto item)throws Exception{
-        String sql = "INSERT INTO produto (produto, cor, qualidade, quantidade, preco) VALUES (?, ?, ?, ?, ?)";
+    public static void inserir(Produto item)throws Exception{
+        String sql = "INSERT INTO produto (produto, cor, marca, quantidade, preco) VALUES (?, ?, ?, ?, ?)";
         
         Connection conexao = ConnectionUtils.getConnection();
         
@@ -28,9 +28,9 @@ public class ItemProdutoDAO {
             
             comando.setString(1, item.produto);
             comando.setString(2, item.cor);
-            comando.setString(3, item.qualidade);
+            comando.setString(3, item.marca);
             comando.setInt(4, item.quantidade);
-            comando.setInt(5, item.preco);
+            comando.setDouble(5, item.preco);
             comando.execute();
             
         }finally{
@@ -54,11 +54,11 @@ public class ItemProdutoDAO {
         }
     }
     
-    public static List<ItemProduto> listar() throws Exception{
+    public static List<Produto> listar() throws Exception{
         String sql = "SELECT * FROM produto";
         
         Connection conexao = ConnectionUtils.getConnection();
-        List<ItemProduto> lista = new ArrayList();
+        List<Produto> lista = new ArrayList();
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -66,14 +66,14 @@ public class ItemProdutoDAO {
             ResultSet dados = comando.executeQuery();
             
             while(dados.next()){
-                ItemProduto item = new ItemProduto();
+                Produto item = new Produto();
                 
                 item.id = dados.getInt("id");
                 item.produto = dados.getString("produto");
                 item.cor = dados.getString("cor");
-                item.qualidade = dados.getString("qualidade");
+                item.marca = dados.getString("marca");
                 item.quantidade = dados.getInt("quantidade");
-                item.preco = dados.getInt("preco");
+                item.preco = dados.getDouble("preco");
                 lista.add(item); 
             }
             
@@ -84,11 +84,11 @@ public class ItemProdutoDAO {
         return lista;
     }
     
-    public static List<ItemProduto> pesquisar(String produto) throws Exception{
+    public static List<Produto> pesquisar(String produto) throws Exception{
         String sql = "SELECT * FROM produto WHERE produto LIKE ?";
         
         Connection conexao = ConnectionUtils.getConnection();
-        List<ItemProduto> lista = new ArrayList();
+        List<Produto> lista = new ArrayList();
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -98,14 +98,14 @@ public class ItemProdutoDAO {
             ResultSet dados = comando.executeQuery();
             
             while(dados.next()){
-                ItemProduto item = new ItemProduto();
+                Produto item = new Produto();
                 
                 item.id = dados.getInt("id");
                 item.produto = dados.getString("produto");
                 item.cor = dados.getString("cor");
-                item.qualidade = dados.getString("qualidade");
+                item.marca = dados.getString("marca");
                 item.quantidade = dados.getInt("quantidade");
-                item.preco = dados.getInt("preco");
+                item.preco = dados.getDouble("preco");
                 
                 lista.add(item);
                 
@@ -118,8 +118,8 @@ public class ItemProdutoDAO {
         return lista;
     }
     
-    public static void editar(ItemProduto item) throws Exception{
-        String sql = "UPDATE produto SET produto = ?, cor = ?, qualidade = ?, quantidade = ?, preco = ? WHERE id = ?"; 
+    public static void editar(Produto item) throws Exception{
+        String sql = "UPDATE produto SET produto = ?, cor = ?, marca = ?, quantidade = ?, preco = ? WHERE id = ?"; 
         
         Connection conexao = ConnectionUtils.getConnection();
         
@@ -128,9 +128,9 @@ public class ItemProdutoDAO {
             
             comando.setString(1, item.produto);
             comando.setString(2, item.cor);
-            comando.setString(3, item.qualidade);
+            comando.setString(3, item.marca);
             comando.setInt(4, item.quantidade);
-            comando.setInt(5, item.preco);
+            comando.setDouble(5, item.preco);
             comando.setInt(6, item.id);
             
             comando.execute();

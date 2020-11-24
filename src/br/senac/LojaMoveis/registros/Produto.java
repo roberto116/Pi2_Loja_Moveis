@@ -9,13 +9,13 @@ package br.senac.LojaMoveis.registros;
  *
  * @author Beto
  */
-public class ItemProduto {
+public class Produto {
     public int id;
     public String produto;
     public String cor;
-    public String qualidade;
+    public String marca;
     public int quantidade;
-    public int preco;
+    public double preco;
     
        public String getProduto(){
         return produto;
@@ -23,15 +23,14 @@ public class ItemProduto {
         public String getCor(){
         return cor;
     }
-        public String getQualidade(){
-        return qualidade;
+        public String getMarca(){
+        return marca;
     }
         public int getQuantidade(){
         return quantidade;
     }
-        public int getPreco(){
+        public double getPreco(){
         return preco;
     }
 }
-
-
+//

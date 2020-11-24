@@ -6,7 +6,7 @@
 package br.senac.LojaMoveis.telas;
 
 import br.senac.LojaMoveis.bd.ItemProdutoDAO;
-import br.senac.LojaMoveis.registros.ItemProduto;
+import br.senac.LojaMoveis.registros.Produto;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +35,7 @@ public class TelaProdutoController implements Initializable {
     @FXML
     private TextField tfCor;
     @FXML
-    private TextField tfQualidade;
+    private TextField tfMarca;
     @FXML
     private TextField tfQuantidade;
     @FXML
@@ -43,30 +43,30 @@ public class TelaProdutoController implements Initializable {
     @FXML
     private TextField tfPesquisar;
     @FXML
-    private TableView<ItemProduto> tabelaProduto;
+    private TableView<Produto> tabelaProduto;
     @FXML
-    private TableColumn<ItemProduto, String> colunaProduto;
+    private TableColumn<Produto, String> colunaProduto;
     @FXML
-    private TableColumn<ItemProduto, String> colunaCor;
+    private TableColumn<Produto, String> colunaCor;
     @FXML
-    private TableColumn<ItemProduto, String> colunaQualidade;
+    private TableColumn<Produto, String> colunaMarca;
     @FXML
-    private TableColumn<ItemProduto, Integer> colunaQuantidade;
+    private TableColumn<Produto, Integer> colunaQuantidade;
     @FXML
-    private TableColumn<ItemProduto, Integer> colunaValor;
+    private TableColumn<Produto, Integer> colunaValor;
     @FXML
     private Button btnSalvar;
     
     //Variaveis globais
     boolean editMode = false;
-    ItemProduto itemProdutoEdicao = null;
+    Produto itemProdutoEdicao = null;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
         colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
-        colunaQualidade.setCellValueFactory(new PropertyValueFactory("qualidade"));
+        colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory("quantidade"));
         colunaValor.setCellValueFactory(new PropertyValueFactory("preco"));
     }    
@@ -75,7 +75,7 @@ public class TelaProdutoController implements Initializable {
     private void limparCampos(ActionEvent event) {
         tfProduto.clear();
         tfCor.clear();
-        tfQualidade.clear();
+        tfMarca.clear();
         tfQuantidade.clear();
         tfValor.clear();
         
@@ -86,14 +86,15 @@ public class TelaProdutoController implements Initializable {
     @FXML
     private void inserir(ActionEvent event) {
         if(!editMode){
-            ItemProduto item = new ItemProduto();
+            Produto item = new Produto();
         
             item.produto = tfProduto.getText();
             item.cor = tfCor.getText();
-            item.qualidade = tfQualidade.getText();
+            item.marca = tfMarca.getText();
             item.quantidade = Integer.parseInt(tfQuantidade.getText());
-            item.preco = Integer.parseInt(tfValor.getText());
-       
+            item.preco = Double.parseDouble(tfValor.getText());
+            
+
         try{
             ItemProdutoDAO.inserir(item);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -114,7 +115,7 @@ public class TelaProdutoController implements Initializable {
         }else{
             itemProdutoEdicao.produto = tfProduto.getText();
             itemProdutoEdicao.cor = tfCor.getText();
-            itemProdutoEdicao.qualidade = tfQualidade.getText();
+            itemProdutoEdicao.marca = tfMarca.getText();
             itemProdutoEdicao.quantidade = Integer.parseInt(tfQuantidade.getText());
             itemProdutoEdicao.preco = Integer.parseInt(tfValor.getText());
             
@@ -144,7 +145,7 @@ public class TelaProdutoController implements Initializable {
     private void pesquisar(ActionEvent event) {
         if(tfPesquisar.getText().equals("")){
             try{
-                List<ItemProduto> resultado = ItemProdutoDAO.listar();
+                List<Produto> resultado = ItemProdutoDAO.listar();
 
                 tabelaProduto.setItems(FXCollections.observableArrayList(resultado));
                 tabelaProduto.refresh();
@@ -160,7 +161,7 @@ public class TelaProdutoController implements Initializable {
         }
         else {
             try{
-                List<ItemProduto> resultado = ItemProdutoDAO.pesquisar(tfPesquisar.getText());
+                List<Produto> resultado = ItemProdutoDAO.pesquisar(tfPesquisar.getText());
 
                 tabelaProduto.setItems(FXCollections.observableArrayList(resultado));
                 tabelaProduto.refresh();
@@ -178,7 +179,7 @@ public class TelaProdutoController implements Initializable {
 
     @FXML
     private void editar(ActionEvent event) {
-        ItemProduto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+        Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         
         if(itemSelecionado != null){
             editMode = true;
@@ -187,7 +188,7 @@ public class TelaProdutoController implements Initializable {
             
             tfProduto.setText(itemProdutoEdicao.produto);
             tfCor.setText(itemProdutoEdicao.cor);
-            tfQualidade.setText(itemProdutoEdicao.qualidade);
+            tfMarca.setText(itemProdutoEdicao.marca);
             tfQuantidade.setText(String.valueOf(itemProdutoEdicao.quantidade));
             tfValor.setText(String.valueOf(itemProdutoEdicao.preco));            
             
@@ -197,7 +198,7 @@ public class TelaProdutoController implements Initializable {
 
     @FXML
     private void excluir(ActionEvent event) {
-        ItemProduto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+        Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         
         if(itemSelecionado != null){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
