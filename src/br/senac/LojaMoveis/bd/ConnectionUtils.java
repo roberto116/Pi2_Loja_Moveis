@@ -17,9 +17,9 @@ import java.sql.DriverManager;
 public class ConnectionUtils {
  
     public static Connection getConnection() throws Exception{
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/projeto_loja_moveis?useTimezone=true&serverTimezone=UTC",
+        return DriverManager.getConnection("jdbc:mysql://localhost:3307/projeto_loja_moveis?useTimezone=true&serverTimezone=UTC",
                                            "root",
-                                           "1234");
+                                           "bigobigo");
     }
     
     public static void main(String[] args){
