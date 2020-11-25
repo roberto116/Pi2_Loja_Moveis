@@ -82,10 +82,34 @@ public class TelaProdutoController implements Initializable {
         btnSalvar.setText("Inserir");
         editMode = false;
     }
+    
+    boolean validarProduto(){
+        int quantidade = 0;
+        double preco = 0;
+        
+        if(tfProduto.getText().isEmpty() || tfCor.getText().isEmpty() || tfMarca.getText().isEmpty()){
+            return false;
+        }
+        
+        try{
+            quantidade = Integer.parseInt(tfQuantidade.getText());
+            preco = Double.parseDouble(tfValor.getText());
+            
+        }catch(Exception e){
+            return false;
+        }
+        
+        return true;
+    }
 
     @FXML
     private void inserir(ActionEvent event) {
         if(!editMode){
+            
+            if(validarProduto() == false){
+                return;
+            }
+            
             Produto item = new Produto();
         
             item.produto = tfProduto.getText();
@@ -113,6 +137,11 @@ public class TelaProdutoController implements Initializable {
         }
             
         }else{
+            
+            if(validarProduto() == false){
+                return;
+            }
+            
             itemProdutoEdicao.produto = tfProduto.getText();
             itemProdutoEdicao.cor = tfCor.getText();
             itemProdutoEdicao.marca = tfMarca.getText();
