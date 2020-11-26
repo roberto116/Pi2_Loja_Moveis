@@ -146,7 +146,7 @@ public class TelaProdutoController implements Initializable {
             itemProdutoEdicao.cor = tfCor.getText();
             itemProdutoEdicao.marca = tfMarca.getText();
             itemProdutoEdicao.quantidade = Integer.parseInt(tfQuantidade.getText());
-            itemProdutoEdicao.preco = Integer.parseInt(tfValor.getText());
+            itemProdutoEdicao.preco = Double.parseDouble(tfValor.getText());
             
             try {
                 ItemProdutoDAO.editar(itemProdutoEdicao);
