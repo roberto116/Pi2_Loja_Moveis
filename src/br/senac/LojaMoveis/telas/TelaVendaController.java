@@ -4,15 +4,20 @@
  * and open the template in the editor.
  */
 package br.senac.LojaMoveis.telas;
-
+import br.senac.LojaMoveis.bd.ItemProdutoDAO;
+import br.senac.LojaMoveis.registros.Produto;
+import br.senac.LojaMoveis.registros.Vendas;
+import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -22,22 +27,44 @@ import javafx.scene.control.TextField;
 public class TelaVendaController implements Initializable {
 
     @FXML
-    private ComboBox<?> cbProduto;
-    @FXML
     private TextField tfQtd;
     @FXML
     private Label tfValorTotal;
     @FXML
-    private ComboBox<?> cbCliente;
+    private TableView<?> tabelaproduto;
+    @FXML
+    private TableView<?> tabelacliente;
+    @FXML
+    private TableColumn<?, ?> Colunacodigo;
+    @FXML
+    private TableColumn<?, ?> colunaproduto;
+    @FXML
+    private TableColumn<?, ?> colunaestoque;
+    @FXML
+    private TableColumn<?, ?> colunavalor;
+    @FXML
+    private TableColumn<?, ?> colunacodigocliente;
+    @FXML
+    private TableColumn<?, ?> colunanome;
+    @FXML
+    private TableColumn<?, ?> colunacpf;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        Colunacodigo.setCellValueFactory(new PropertyValueFactory("id"));
+        //colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
+        //colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
+        //colunaQuantidade.setCellValueFactory(new PropertyValueFactory("quantidade"));
+        //colunaValor.setCellValueFactory(new PropertyValueFactory("preco"));
     }    
+       
 
     @FXML
     private void finalizar(ActionEvent event) {
+        
+        
     }
     
 }

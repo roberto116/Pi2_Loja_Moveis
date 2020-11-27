@@ -5,21 +5,22 @@
  */
 package br.senac.LojaMoveis.registros;
 
+import java.util.Date;
+
 /**
  *
  * @author Lenovo
  */
-public class Venda {
+public class Vendas {
     
-    public int idvenda;
-    public int idProduto;
-    public int quantidade;
-    public double total;
-         
-        public int getQuantidade(){
-        return quantidade;
+    public int id;
+    public int idcliente;
+    public Date datavenda;
+      
+    public Date getDatavenda(){
+        return datavenda;
     }
-        public double getTotal(){
-        return total;
-    }
+   
+
+    
 }

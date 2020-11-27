@@ -5,7 +5,6 @@
  */
 package br.senac.LojaMoveis.bd;
 
-import br.senac.LojaMoveis.registros.Vendas;
 import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import java.sql.Connection;
 import java.sql.Date;
@@ -15,26 +14,23 @@ import java.sql.PreparedStatement;
  *
  * @author Lenovo
  */
-public class ItemVendaDAO {
-    public static void inserirVendas(Vendas item)throws Exception{
-        String sql = "insert into vendas(idcliente,datavenda) VALUES (?, ?)";
+public class ItemVendas_ProdutosDAO {
+      public static void inserirVendasProdutos(Vendas_Produtos item)throws Exception{
+        String sql = "insert into vendas(idvenda,idproduto,estoque,total) VALUES (?, ?, ?, ?)";
         
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sql);
             
-            comando.setInt(1, item.idcliente);
-            comando.setDate(2, (Date) item.datavenda);
-            
+            comando.setInt(1, item.idvenda);
+            comando.setInt(2, item.idProduto);
+            comando.setInt(3, item.quantidade);
+            comando.setDouble(4, item.total);
             
         }finally{
             conexao.close();
         }
 
     }
-   }
-    
-
-
-    
+}
