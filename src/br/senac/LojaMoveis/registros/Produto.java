@@ -14,7 +14,7 @@ public class Produto {
     public String produto;
     public String cor;
     public String marca;
-    public int quantidade;
+    public int estoque;
     public double preco;
     
        public String getProduto(){
@@ -26,8 +26,8 @@ public class Produto {
         public String getMarca(){
         return marca;
     }
-        public int getQuantidade(){
-        return quantidade;
+        public int getEstoque(){
+        return estoque;
     }
         public double getPreco(){
         return preco;

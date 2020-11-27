@@ -19,7 +19,7 @@ import java.util.List;
 public class ItemProdutoDAO {
     
     public static void inserir(Produto item)throws Exception{
-        String sql = "INSERT INTO produto (produto, cor, marca, quantidade, preco) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (produto, cor, marca, estoque, preco) VALUES (?, ?, ?, ?, ?)";
         
         Connection conexao = ConnectionUtils.getConnection();
         
@@ -29,7 +29,7 @@ public class ItemProdutoDAO {
             comando.setString(1, item.produto);
             comando.setString(2, item.cor);
             comando.setString(3, item.marca);
-            comando.setInt(4, item.quantidade);
+            comando.setInt(4, item.estoque);
             comando.setDouble(5, item.preco);
             comando.execute();
             
@@ -72,7 +72,7 @@ public class ItemProdutoDAO {
                 item.produto = dados.getString("produto");
                 item.cor = dados.getString("cor");
                 item.marca = dados.getString("marca");
-                item.quantidade = dados.getInt("quantidade");
+                item.estoque = dados.getInt("estoque");
                 item.preco = dados.getDouble("preco");
                 lista.add(item); 
             }
@@ -104,7 +104,7 @@ public class ItemProdutoDAO {
                 item.produto = dados.getString("produto");
                 item.cor = dados.getString("cor");
                 item.marca = dados.getString("marca");
-                item.quantidade = dados.getInt("quantidade");
+                item.estoque = dados.getInt("estoque");
                 item.preco = dados.getDouble("preco");
                 
                 lista.add(item);
@@ -119,7 +119,7 @@ public class ItemProdutoDAO {
     }
     
     public static void editar(Produto item) throws Exception{
-        String sql = "UPDATE produto SET produto = ?, cor = ?, marca = ?, quantidade = ?, preco = ? WHERE id = ?"; 
+        String sql = "UPDATE produto SET produto = ?, cor = ?, marca = ?, estoque = ?, preco = ? WHERE id = ?"; 
         
         Connection conexao = ConnectionUtils.getConnection();
         
@@ -129,7 +129,7 @@ public class ItemProdutoDAO {
             comando.setString(1, item.produto);
             comando.setString(2, item.cor);
             comando.setString(3, item.marca);
-            comando.setInt(4, item.quantidade);
+            comando.setInt(4, item.estoque);
             comando.setDouble(5, item.preco);
             comando.setInt(6, item.id);
             

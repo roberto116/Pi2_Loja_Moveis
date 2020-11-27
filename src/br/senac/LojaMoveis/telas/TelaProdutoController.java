@@ -67,7 +67,7 @@ public class TelaProdutoController implements Initializable {
         colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
         colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
         colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
-        colunaQuantidade.setCellValueFactory(new PropertyValueFactory("quantidade"));
+        colunaQuantidade.setCellValueFactory(new PropertyValueFactory("estoque"));
         colunaValor.setCellValueFactory(new PropertyValueFactory("preco"));
     }    
 
@@ -115,7 +115,7 @@ public class TelaProdutoController implements Initializable {
             item.produto = tfProduto.getText();
             item.cor = tfCor.getText();
             item.marca = tfMarca.getText();
-            item.quantidade = Integer.parseInt(tfQuantidade.getText());
+            item.estoque = Integer.parseInt(tfQuantidade.getText());
             item.preco = Double.parseDouble(tfValor.getText());
             
 
@@ -145,7 +145,7 @@ public class TelaProdutoController implements Initializable {
             itemProdutoEdicao.produto = tfProduto.getText();
             itemProdutoEdicao.cor = tfCor.getText();
             itemProdutoEdicao.marca = tfMarca.getText();
-            itemProdutoEdicao.quantidade = Integer.parseInt(tfQuantidade.getText());
+            itemProdutoEdicao.estoque = Integer.parseInt(tfQuantidade.getText());
             itemProdutoEdicao.preco = Double.parseDouble(tfValor.getText());
             
             try {
@@ -218,7 +218,7 @@ public class TelaProdutoController implements Initializable {
             tfProduto.setText(itemProdutoEdicao.produto);
             tfCor.setText(itemProdutoEdicao.cor);
             tfMarca.setText(itemProdutoEdicao.marca);
-            tfQuantidade.setText(String.valueOf(itemProdutoEdicao.quantidade));
+            tfQuantidade.setText(String.valueOf(itemProdutoEdicao.estoque));
             tfValor.setText(String.valueOf(itemProdutoEdicao.preco));            
             
             btnSalvar.setText("Salvar");
