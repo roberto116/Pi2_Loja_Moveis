@@ -32,7 +32,16 @@ public class TelaInicialController implements Initializable {
     }    
 
     @FXML
-    private void abrirTelaCliente(ActionEvent event) {
+    private void abrirTelaCliente(ActionEvent event) throws IOException {
+        URL url = getClass().getResource("/br/senac/LojaMoveis/telas/TelaCadastroCliente.fxml");
+        
+        Parent TelaPrincipal = FXMLLoader.load(url);
+        
+        Scene scene = new Scene (TelaPrincipal);
+        
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
         
     }
 

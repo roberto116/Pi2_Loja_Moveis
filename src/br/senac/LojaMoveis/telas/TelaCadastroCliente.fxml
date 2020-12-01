@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="470.0" prefWidth="620.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="br.senac.LojaMoveis.telas.TelaCadastroClienteController">
+   <children>
+      <Label layoutX="539.0" layoutY="9.0" text="CONTATO">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="131.0" layoutY="1.0" text="DADOS PESSOAIS">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField id="txtNome" layoutX="128.0" layoutY="36.0" promptText="Nome" />
+      <TextField id="txtSobrenome" layoutX="128.0" layoutY="71.0" promptText="Sobrenome" />
+      <TextField layoutX="128.0" layoutY="188.0" promptText="Data de Nascimento" />
+      <TextField id="txtRg" layoutX="128.0" layoutY="149.0" promptText="RG" />
+      <TextField id="txtCpf" layoutX="128.0" layoutY="110.0" promptText="CPF" />
+      <TextField layoutX="506.0" layoutY="36.0" promptText="E-mail" />
+      <TextField layoutX="506.0" layoutY="71.0" promptText="Telefone" />
+      <TextField layoutX="506.0" layoutY="102.0" promptText="Celular" />
+      <Label layoutX="533.0" layoutY="161.0" text="ENDERECO">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="506.0" layoutY="188.0" promptText="Rua" />
+      <TextField layoutX="503.0" layoutY="364.0" promptText="Numero" />
+      <TextField layoutX="506.0" layoutY="255.0" promptText="Bairro" />
+      <TextField layoutX="503.0" layoutY="223.0" promptText="Cidade" />
+      <TextField layoutX="506.0" layoutY="292.0" promptText="CEP" />
+      <TextField layoutX="503.0" layoutY="325.0" promptText="UF" />
+      <Button id="btnInserir" layoutX="203.0" layoutY="438.0" mnemonicParsing="false" text="INSERIR" />
+      <Button id="btnAlterar" layoutX="367.0" layoutY="437.0" mnemonicParsing="false" text="ALTERAR" />
+      <Button id="btnExxcluir" layoutX="509.0" layoutY="437.0" mnemonicParsing="false" text="EXCLUIR" />
+      <TableView layoutX="103.0" layoutY="238.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Nome" />
+          <TableColumn prefWidth="75.0" text="CPF" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
