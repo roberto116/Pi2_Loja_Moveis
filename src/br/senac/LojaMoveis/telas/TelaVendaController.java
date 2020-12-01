@@ -13,7 +13,10 @@ import br.senac.LojaMoveis.registros.Produto;
 import br.senac.LojaMoveis.registros.Vendas;
 import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -68,6 +71,19 @@ public class TelaVendaController implements Initializable {
     @FXML
     private void finalizar(ActionEvent event) {
         
+        Vendas_Produtos item = new Vendas_Produtos();
+        Vendas venda = new Vendas();
+        Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+        Calendar data = Calendar.getInstance();
+        Date d = data.getTime();       
+               
+        venda.datavenda = d;
+        //venda.idcliente;
+        item.idProduto = itemSelecionado.id ;
+        item.idvenda = venda.id;
+        item.quantidade = Integer.parseInt(tfQtd.getText());
+        item.total = Double.parseDouble(tfValorTotal.getText());
+     
         
     }
 
