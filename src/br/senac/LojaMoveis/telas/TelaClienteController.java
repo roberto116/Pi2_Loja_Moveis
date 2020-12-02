@@ -5,14 +5,18 @@
  */
 package br.senac.LojaMoveis.telas;
 
+import br.senac.LojaMoveis.bd.ClienteDAO;
 import br.senac.LojaMoveis.registros.Cliente;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -77,7 +81,11 @@ public class TelaClienteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+       //colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
+        //colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
+        //colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
+        //colunaQuantidade.setCellValueFactory(new PropertyValueFactory("estoque"));
+        //colunaValor.setCellValueFactory(new PropertyValueFactory("preco"));
     }    
 
     @FXML
@@ -103,7 +111,42 @@ public class TelaClienteController implements Initializable {
 
     @FXML
     private void inserir(ActionEvent event) {
+        Cliente cliente = new Cliente();
         
+        cliente.nome = tfNome.getText();
+        cliente.sobrenome = tfSobrenome.getText();
+        cliente.nascimento = Date.valueOf(tfNascimento.getText());
+        cliente.rg = Integer.parseInt(tfRg.getText());
+        cliente.endereco = tfEndereco.getText();
+        cliente.bairro = tfBairro.getText();
+        cliente.cidade = tfCidade.getText();
+        cliente.estadoCivil = tfEstadoCivil.getText();
+        cliente.cpf = Integer.parseInt(tfCpf.getText());
+        cliente.numero = Integer.parseInt(tfNumero.getText());
+        cliente.cep = Integer.parseInt(tfCep.getText());
+        cliente.email = tfEmail.getText();
+        cliente.telefone = Integer.parseInt(tfTelefone.getText());
+        cliente.complemento = tfComplemento.getText();
+        cliente.uf = tfUf.getText();
+        cliente.celular = Integer.parseInt(tfCelular.getText());
+        cliente.genero = tfGenero.getText();
+        
+         try{
+            ClienteDAO.inserir(cliente);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Inserir");
+            alert.setHeaderText("Inserido com Sucesso");
+            alert.setContentText("Click em OK para continuar");
+            alert.showAndWait();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Inserir");
+            alert.setHeaderText("Valha ao Inserir");
+            alert.setContentText("Click em OK para continuar");
+            alert.showAndWait();
+        }
     }
 
     @FXML

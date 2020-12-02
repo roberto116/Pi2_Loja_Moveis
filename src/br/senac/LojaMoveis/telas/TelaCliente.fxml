@@ -7,8 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="867.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="br.senac.LojaMoveis.telas.TelaClienteController">
+<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.LojaMoveis.telas.TelaClienteController">
    <children>
       <Label layoutX="38.0" layoutY="54.0" text="Nome:" />
       <Label layoutX="291.0" layoutY="54.0" text="Sobrenome:" />
@@ -29,7 +28,6 @@
       <Label layoutX="24.0" layoutY="274.0" text="Estado Civil:" />
       <TextField fx:id="tfNome" layoutX="97.0" layoutY="50.0" promptText="Nome" />
       <TextField fx:id="tfSobrenome" layoutX="373.0" layoutY="50.0" promptText="Sobrenome" />
-      <TextField fx:id="tfNascimento" layoutX="684.0" layoutY="50.0" promptText="Data de Nascimento" />
       <TextField fx:id="tfRg" layoutX="97.0" layoutY="89.0" promptText="RG" />
       <TextField fx:id="tfEndereco" layoutX="97.0" layoutY="130.0" promptText="Endereço" />
       <TextField fx:id="tfBairro" layoutX="97.0" layoutY="175.0" promptText="Bairro" />
@@ -61,5 +59,6 @@
       <TextField fx:id="tfPesquisa" layoutX="53.0" layoutY="334.0" prefHeight="25.0" prefWidth="331.0" promptText="Click para &quot;Pesquisa&quot;" />
       <Button layoutX="398.0" layoutY="334.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="111.0" text="Pesquisar" />
       <Button layoutX="721.0" layoutY="334.0" mnemonicParsing="false" onAction="#excluir" prefHeight="25.0" prefWidth="111.0" text="Excluir" />
+      <TextField fx:id="tfNascimento" layoutX="684.0" layoutY="50.0" promptText="Data de Nascimento" />
    </children>
 </AnchorPane>
