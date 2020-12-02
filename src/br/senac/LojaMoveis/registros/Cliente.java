@@ -5,6 +5,8 @@
  */
 package br.senac.LojaMoveis.registros;
 
+import java.util.Date;
+
 /**
  *
  * @author lenovo
@@ -13,10 +15,21 @@ public class Cliente {
     public int id;
     public String nome;
     public String sobrenome;
+    public Date nascimento;
+    public int rg;
+    public String endereco;
+    public String bairro;
+    public String cidade;
+    public String estadoCivil;
     public int cpf;
+    public int numero;
+    public int cep;
     public String email;
-    public int rg; 
-    public double datanascimento;
+    public int telefone;
+    public String complemento;
+    public String uf;
+    public int celular;
+    public String genero;
     
        public String getNome(){
         return nome;
@@ -24,17 +37,50 @@ public class Cliente {
         public String getSobrenome(){
         return sobrenome;
     }
-        public Integer getCpf(){
+        public int getCpf(){
         return cpf;
     }
         public int getRg(){
         return rg;
     }
-            public String getEmail(){
+        public String getEmail(){
         return email;
     }
-        public double getDataNascimento(){
-        return datanascimento;
+        public Date getNascimento(){
+        return nascimento;
+    }
+        public String getEndereco(){
+        return endereco;
+    }
+        public int getNumero(){
+        return numero;
+    }
+        public String getBairro(){
+        return bairro;
+    }
+        public String getCidade(){
+        return cidade;
+    }
+        public String getEstadoCivil(){
+        return estadoCivil;
+    }
+        public int getCep(){
+        return cep;
+    }
+        public int getTelefone(){
+        return telefone;
+    }
+        public String getComplemento(){
+        return complemento;
+    }
+        public String getUf(){
+        return uf;
+    }
+        public int getCelular(){
+        return celular;
+    }
+        public String getGenero(){
+        return genero;
     }
 }
 
