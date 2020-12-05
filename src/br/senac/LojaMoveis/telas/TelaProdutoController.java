@@ -86,10 +86,24 @@ public class TelaProdutoController implements Initializable {
     boolean validarProduto(){
         int quantidade = 0;
         double preco = 0;
+        int qtd = 0;
         
         if(tfProduto.getText().isEmpty() || tfCor.getText().isEmpty() || tfMarca.getText().isEmpty()){
             return false;
         }
+        
+        qtd = tfProduto.getText().length();
+            if(qtd > 40){
+                return false;
+            }
+        qtd = tfCor.getText().length();
+            if(qtd > 10){
+                return false;
+            }
+        qtd = tfMarca.getText().length();
+            if(qtd > 10){
+                return false;
+            }
         
         try{
             quantidade = Integer.parseInt(tfQuantidade.getText());

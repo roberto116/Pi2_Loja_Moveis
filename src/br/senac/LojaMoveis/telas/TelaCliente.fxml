@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.LojaMoveis.telas.TelaClienteController">
+<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.LojaMoveis.telas.TelaClienteController">
    <children>
       <Label layoutX="38.0" layoutY="54.0" text="Nome:" />
       <Label layoutX="291.0" layoutY="54.0" text="Sobrenome:" />
@@ -43,7 +43,7 @@
       <TextField fx:id="tfUf" layoutX="684.0" layoutY="175.0" promptText="UF" />
       <TextField fx:id="tfCelular" layoutX="684.0" layoutY="222.0" promptText="Celular" />
       <TextField fx:id="tfGenero" layoutX="373.0" layoutY="270.0" promptText="Genero" />
-      <TableView fx:id="tabelaCliente" layoutX="53.0" layoutY="365.0" prefHeight="200.0" prefWidth="779.0">
+      <TableView fx:id="tabelaCliente" layoutX="53.0" layoutY="367.0" prefHeight="200.0" prefWidth="781.0">
         <columns>
           <TableColumn fx:id="colunaNome" prefWidth="113.0" text="Nome" />
           <TableColumn fx:id="colunaSobrenome" prefWidth="106.0" text="Sobrenome" />

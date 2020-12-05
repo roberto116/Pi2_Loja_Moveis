@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -101,6 +102,9 @@ public class TelaClienteController implements Initializable {
         colunaTelefone.setCellValueFactory(new PropertyValueFactory("telefone"));
         colunaCelular.setCellValueFactory(new PropertyValueFactory("celular"));
         colunaCidade.setCellValueFactory(new PropertyValueFactory("cidade"));
+        
+        LocalDate hoje = LocalDate.now();
+        data.setValue(hoje);
     }    
 
     @FXML
@@ -125,15 +129,104 @@ public class TelaClienteController implements Initializable {
         btnSalvar.setText("Inserir");
     }
     
+    void alert (String title, String msg, AlertType type){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+    
     boolean validarCliente(){
         int telefone, celular, cep, cpf, rg, numero;
+        int qtd = 0;
         
         if(tfNome.getText().isEmpty()|| tfSobrenome.getText().isEmpty() || tfEndereco.getText().isEmpty() || tfBairro.getText().isEmpty() || 
            tfCidade.getText().isEmpty() || tfEstadoCivil.getText().isEmpty() || tfEmail.getText().isEmpty() || tfComplemento.getText().isEmpty() ||
            tfUf.getText().isEmpty() || tfGenero.getText().isEmpty()){
-            
+           
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Campos vazios");
+                alert.setContentText("Click em OK para continuar");
+                alert.showAndWait();
+           
            return false; 
         }
+        qtd = tfNome.getText().length();
+            if(qtd > 15){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfSobrenome.getText().length();
+            if(qtd > 30){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfEndereco.getText().length();
+            if(qtd > 50){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfBairro.getText().length();
+            if(qtd > 30){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfCidade.getText().length();
+            if(qtd > 30){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfEstadoCivil.getText().length();
+            if(qtd > 10){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfEmail.getText().length();
+            if(qtd > 50){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfComplemento.getText().length();
+            if(qtd > 10){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfUf.getText().length();
+            if(qtd > 2){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfGenero.getText().length();
+            if(qtd > 10){
+                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfTelefone.getText().length();
+            if(qtd > 9){
+                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfCelular.getText().length();
+            if(qtd > 9){
+                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfCep.getText().length();
+            if(qtd > 8){
+                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfCpf.getText().length();
+            if(qtd > 11){
+                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                return false;
+            }
+        qtd = tfRg.getText().length();
+            if(qtd > 9){
+                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                return false;
+            }
         
         try{
             telefone = Integer.parseInt(tfTelefone.getText());
@@ -144,6 +237,11 @@ public class TelaClienteController implements Initializable {
             numero = Integer.parseInt(tfNumero.getText());
             
         }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Letras no lugar de numeros");
+                alert.setContentText("Click em OK para continuar");
+                alert.showAndWait();
             return false;
         }
         
