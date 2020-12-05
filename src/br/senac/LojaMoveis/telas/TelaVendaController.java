@@ -8,7 +8,9 @@ package br.senac.LojaMoveis.telas;
 //import br.senac.LojaMoveis.registros.Produto;
 //import br.senac.LojaMoveis.registros.Vendas;
 //import br.senac.LojaMoveis.registros.Vendas_Produtos;
+import br.senac.LojaMoveis.bd.ClienteDAO;
 import br.senac.LojaMoveis.bd.ItemProdutoDAO;
+import br.senac.LojaMoveis.registros.Cliente;
 import br.senac.LojaMoveis.registros.Produto;
 import br.senac.LojaMoveis.registros.Vendas;
 import br.senac.LojaMoveis.registros.Vendas_Produtos;
@@ -42,8 +44,6 @@ public class TelaVendaController implements Initializable {
     @FXML
     private Label tfValorTotal;
     @FXML
-    private TextField tfPesquisar;
-    @FXML
     private TableView<Produto> tabelaProduto;
     @FXML
     private TableColumn<Produto, String> colunaProduto;
@@ -55,15 +55,43 @@ public class TelaVendaController implements Initializable {
     private TableColumn<Produto, Integer> colunaQuantidade;
     @FXML
     private TableColumn<Produto, Integer> colunaValor;
+    @FXML
+    private TableView<Cliente> tabelaCliente;
+    @FXML
+    private TableColumn<Cliente, String> colunaNome;
+    @FXML
+    private TableColumn<Cliente, String> colunaSobrenome;
+    @FXML
+    private TableColumn<Cliente, Integer> colunaRg;
+    @FXML
+    private TableColumn<Cliente, Integer> colunaCpf;
+    @FXML
+    private TableColumn<Cliente, Integer> colunaTelefone;
+    @FXML
+    private TableColumn<Cliente, Integer> colunaCelular;
+    @FXML
+    private TableColumn<Cliente, String> colunaCidade;
+    @FXML
+    private TextField tfPesquisarProd;
+    @FXML
+    private TextField tfPesquisaCliente;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         
-         colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
+        colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
         colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
         colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory("estoque"));
         colunaValor.setCellValueFactory(new PropertyValueFactory("preco"));
+        
+        colunaNome.setCellValueFactory(new PropertyValueFactory("nome"));
+        colunaSobrenome.setCellValueFactory(new PropertyValueFactory("sobrenome"));
+        colunaRg.setCellValueFactory(new PropertyValueFactory("rg"));
+        colunaCpf.setCellValueFactory(new PropertyValueFactory("cpf"));
+        colunaTelefone.setCellValueFactory(new PropertyValueFactory("telefone"));
+        colunaCelular.setCellValueFactory(new PropertyValueFactory("celular"));
+        colunaCidade.setCellValueFactory(new PropertyValueFactory("cidade"));
        
     }    
        
@@ -88,9 +116,8 @@ public class TelaVendaController implements Initializable {
     }
 
     
-    @FXML
     private void pesquisar(ActionEvent event) {
-        if(tfPesquisar.getText().equals("")){
+        if(tfPesquisarProd.getText().equals("")){
             try{
                 List<Produto> resultado = ItemProdutoDAO.listar();
 
@@ -107,7 +134,7 @@ public class TelaVendaController implements Initializable {
         }
         else {
             try{
-                List<Produto> resultado = ItemProdutoDAO.pesquisar(tfPesquisar.getText());
+                List<Produto> resultado = ItemProdutoDAO.pesquisar(tfPesquisarProd.getText());
 
                 tabelaProduto.setItems(FXCollections.observableArrayList(resultado));
                 tabelaProduto.refresh();
@@ -166,6 +193,76 @@ public class TelaVendaController implements Initializable {
             }  
         }
         
+    }
+
+    @FXML
+    private void pesquisarProd(ActionEvent event) 
+    {
+          if(tfPesquisarProd.getText().equals("")){
+            try{
+                List<Produto> resultado = ItemProdutoDAO.listar();
+
+                tabelaProduto.setItems(FXCollections.observableArrayList(resultado));
+                tabelaProduto.refresh();
+                
+            }catch(Exception e){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Pesquisar");
+                alert.setHeaderText("Falha ao Pesquisar");
+                alert.setContentText("Click em OK para continuar");
+                alert.showAndWait();
+            }
+        }
+        else {
+            try{
+                List<Produto> resultado = ItemProdutoDAO.pesquisar(tfPesquisarProd.getText());
+
+                tabelaProduto.setItems(FXCollections.observableArrayList(resultado));
+                tabelaProduto.refresh();
+                
+            }catch(Exception e){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Pesquisar");
+                alert.setHeaderText("Falha ao Pesquisa");
+                alert.setContentText("Click em OK para continuar");
+                alert.showAndWait();
+            }  
+        } 
+    }
+
+    @FXML
+    private void pesquisarClie(ActionEvent event) 
+    {
+           if(tfPesquisaCliente.getText().equals("")){
+            try{
+                List<Cliente> resultado = ClienteDAO.listar();
+
+                tabelaCliente.setItems(FXCollections.observableArrayList(resultado));
+                tabelaCliente.refresh();
+                
+            }catch(Exception e){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Pesquisar");
+                alert.setHeaderText("Falha ao Pesquisar");
+                alert.setContentText("Click em OK para continuar");
+                alert.showAndWait();
+            }
+        }
+        else {
+            try{
+                List<Cliente> resultado = ClienteDAO.pesquisar(tfPesquisaCliente.getText());
+
+                tabelaCliente.setItems(FXCollections.observableArrayList(resultado));
+                tabelaCliente.refresh();
+                
+            }catch(Exception e){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Pesquisar");
+                alert.setHeaderText("Falha ao Pesquisa");
+                alert.setContentText("Click em OK para continuar");
+                alert.showAndWait();
+            }  
+        }
     }
         
         
