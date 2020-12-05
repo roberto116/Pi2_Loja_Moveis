@@ -83,6 +83,13 @@ public class TelaProdutoController implements Initializable {
         editMode = false;
     }
     
+     void alert (String title, String msg, Alert.AlertType type){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+    
     boolean validarProduto(){
         int quantidade = 0;
         double preco = 0;
@@ -94,14 +101,17 @@ public class TelaProdutoController implements Initializable {
         
         qtd = tfProduto.getText().length();
             if(qtd > 40){
+                alert("Erro", "Limite de Caracteres ultrapassado", Alert.AlertType.ERROR);
                 return false;
             }
         qtd = tfCor.getText().length();
             if(qtd > 10){
+                alert("Erro", "Limite de Caracteres ultrapassado", Alert.AlertType.ERROR);
                 return false;
             }
         qtd = tfMarca.getText().length();
             if(qtd > 10){
+                alert("Erro", "Limite de Caracteres ultrapassado", Alert.AlertType.ERROR);
                 return false;
             }
         
