@@ -154,77 +154,77 @@ public class TelaClienteController implements Initializable {
         }
         qtd = tfNome.getText().length();
             if(qtd > 15){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Nome' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfSobrenome.getText().length();
             if(qtd > 30){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Sobrenome' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfEndereco.getText().length();
             if(qtd > 50){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Endereço' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfBairro.getText().length();
             if(qtd > 30){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Bairro' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfCidade.getText().length();
             if(qtd > 30){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Cidade' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfEstadoCivil.getText().length();
             if(qtd > 10){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Estado Civil' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfEmail.getText().length();
             if(qtd > 50){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Email' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfComplemento.getText().length();
             if(qtd > 10){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Complemento' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfUf.getText().length();
             if(qtd > 2){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'UF' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfGenero.getText().length();
             if(qtd > 10){
-                alert("Erro", "Limite de Caracteres ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Genero' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfTelefone.getText().length();
             if(qtd > 9){
-                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                alert("Erro", "'telefone' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfCelular.getText().length();
             if(qtd > 9){
-                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                alert("Erro", "'Celular' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfCep.getText().length();
             if(qtd > 8){
-                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                alert("Erro", "'CEP' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfCpf.getText().length();
             if(qtd > 11){
-                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                alert("Erro", "'CPF' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         qtd = tfRg.getText().length();
             if(qtd > 9){
-                alert("Erro", "Limite de numeros ultrapassado", AlertType.ERROR);
+                alert("Erro", "'RG' ultrapasso o limite de caracteres", AlertType.ERROR);
                 return false;
             }
         

@@ -101,17 +101,17 @@ public class TelaProdutoController implements Initializable {
         
         qtd = tfProduto.getText().length();
             if(qtd > 40){
-                alert("Erro", "Limite de Caracteres ultrapassado", Alert.AlertType.ERROR);
+                alert("Erro", "'Produto' ultrapasso o limite de caracteres", Alert.AlertType.ERROR);
                 return false;
             }
         qtd = tfCor.getText().length();
             if(qtd > 10){
-                alert("Erro", "Limite de Caracteres ultrapassado", Alert.AlertType.ERROR);
+                alert("Erro", "'Cor' ultrapasso o limite de caracteres", Alert.AlertType.ERROR);
                 return false;
             }
         qtd = tfMarca.getText().length();
             if(qtd > 10){
-                alert("Erro", "Limite de Caracteres ultrapassado", Alert.AlertType.ERROR);
+                alert("Erro", "'Marca' ultrapasso o limite de caracteres", Alert.AlertType.ERROR);
                 return false;
             }
         
