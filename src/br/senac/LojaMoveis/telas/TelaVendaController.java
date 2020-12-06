@@ -10,12 +10,15 @@ package br.senac.LojaMoveis.telas;
 //import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import br.senac.LojaMoveis.bd.ClienteDAO;
 import br.senac.LojaMoveis.bd.ItemProdutoDAO;
+import br.senac.LojaMoveis.bd.ItemVendaDAO;
+import br.senac.LojaMoveis.bd.ItemVendas_ProdutosDAO;
 import br.senac.LojaMoveis.registros.Cliente;
 import br.senac.LojaMoveis.registros.Produto;
 import br.senac.LojaMoveis.registros.Vendas;
 import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,6 +29,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -75,6 +80,12 @@ public class TelaVendaController implements Initializable {
     private TextField tfPesquisarProd;
     @FXML
     private TextField tfPesquisaCliente;
+    @FXML
+    private Button Carrinho;
+    @FXML
+    private Label tfCarrinho;
+    @FXML
+    private DatePicker dtData;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -99,19 +110,38 @@ public class TelaVendaController implements Initializable {
     @FXML
     private void finalizar(ActionEvent event) {
         
-        Vendas_Produtos item = new Vendas_Produtos();
-        Vendas venda = new Vendas();
-        Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
-        Calendar data = Calendar.getInstance();
-        Date d = data.getTime();       
-               
-        venda.datavenda = d;
-        //venda.idcliente;
-        item.idProduto = itemSelecionado.id ;
-        item.idvenda = venda.id;
-        item.quantidade = Integer.parseInt(tfQtd.getText());
-        item.total = Double.parseDouble(tfValorTotal.getText());
-     
+       
+            Vendas_Produtos item = new Vendas_Produtos();
+            Vendas venda = new Vendas();
+            Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+            Cliente clienSelecionado = tabelaCliente.getSelectionModel().getSelectedItem();
+            
+            LocalDate dataDigitada = dtData.getValue();
+            venda.datavenda = java.sql.Date.valueOf(dataDigitada);
+            
+            venda.idcliente = clienSelecionado.id;         
+            item.idProduto = itemSelecionado.id;
+            item.idvenda = venda.id;
+            item.quantidade = Integer.parseInt(tfQtd.getText());
+            item.total = Double.parseDouble(tfValorTotal.getText());
+            
+      try{
+            ItemVendaDAO.inserirVendas(venda);
+            ItemVendas_ProdutosDAO.inserirVendasProdutos(item);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Inserir");
+            alert.setHeaderText("Inserido com Sucesso");
+            alert.setContentText("Click em OK para continuar");
+            alert.showAndWait();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Inserir");
+            alert.setHeaderText("Falha ao Inserir");
+            alert.setContentText("Click em OK para continuar");
+            alert.showAndWait();
+        }
         
     }
 
@@ -263,6 +293,26 @@ public class TelaVendaController implements Initializable {
                 alert.showAndWait();
             }  
         }
+    }
+
+    @FXML
+    private void Carrinho(ActionEvent event) 
+    {
+        Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+        String Prod = itemSelecionado.produto;
+        
+        List<String> carrinho = new ArrayList();
+        
+        for(int i = 0; i < carrinho.size();i++) 
+        {
+            carrinho.add(Prod);
+            
+        }
+            String Adicionar = "" + carrinho;
+            tfCarrinho.setText(Adicionar);
+        
+        
+       
     }
         
         
