@@ -18,43 +18,17 @@ public class Vendas {
     public int id;
     public int idcliente;
     public Date datavenda;
-    private List<Vendas_Produtos> itensDeVenda;
-    private Cliente cliente;
-
-   
-
+  
     public int getId() {
         return id;
     }
 
-    public void setid(int id) {
-        this.id = id;
+    public int getIdCliente(int id) {
+        return idcliente;
     }
 
     public Date getDatavenda() {
         return datavenda;
-    }
-
-    public void setData(Date datavenda) {
-        this.datavenda = datavenda;
-    }
-
-    
-
-    public List<Vendas_Produtos> getVendasProdutos() {
-        return itensDeVenda;
-    }
-
-    public void setItensDeVenda(List<Vendas_Produtos> itensDeVenda) {
-        this.itensDeVenda = itensDeVenda;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
     
 }

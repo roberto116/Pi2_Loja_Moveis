@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
  */
 public class ItemVendas_ProdutosDAO {
       public static void inserirVendasProdutos(Vendas_Produtos item)throws Exception{
-        String sql = "insert into vendas(idvenda,idproduto,estoque,total) VALUES (?, ?, ?, ?)";
+        String sql = "insert into vendas(idvenda,idProduto,quantidade,total) VALUES (?, ?, ?, ?)";
         
         Connection conexao = ConnectionUtils.getConnection();
         

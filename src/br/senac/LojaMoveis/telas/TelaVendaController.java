@@ -111,11 +111,7 @@ public class TelaVendaController implements Initializable {
         colunaIdClien.setCellValueFactory(new PropertyValueFactory("id"));
         colunaNome.setCellValueFactory(new PropertyValueFactory("nome"));
         colunaSobrenome.setCellValueFactory(new PropertyValueFactory("sobrenome"));
-        colunaRg.setCellValueFactory(new PropertyValueFactory("rg"));
-        colunaCpf.setCellValueFactory(new PropertyValueFactory("cpf"));
-        colunaTelefone.setCellValueFactory(new PropertyValueFactory("telefone"));
-        colunaCelular.setCellValueFactory(new PropertyValueFactory("celular"));
-        colunaCidade.setCellValueFactory(new PropertyValueFactory("cidade"));
+        
         
         LocalDate hoje = LocalDate.now();
         dtData.setValue(hoje);
@@ -137,7 +133,7 @@ public class TelaVendaController implements Initializable {
             venda.idcliente = Integer.parseInt(tfIdCliente.getText());   
             
             item.idProduto = Integer.parseInt(tfIdProd.getText());
-            item.idvenda = venda.id;
+            item.idvenda = 
             item.quantidade = Integer.parseInt(tfQtd.getText());
             item.total = Double.parseDouble(tfValorTotal.getText());
             
@@ -161,10 +157,6 @@ public class TelaVendaController implements Initializable {
         
     }
 
-    
-   
-
-              
 
     @FXML
     private void calcular(ActionEvent event)

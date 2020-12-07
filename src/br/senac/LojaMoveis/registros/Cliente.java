@@ -82,6 +82,9 @@ public class Cliente {
         public String getGenero(){
         return genero;
     }
+        public int getId(){
+        return id;
+    }
 }
 
 

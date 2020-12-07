@@ -32,6 +32,7 @@ public class ItemVendaDAO {
             
             
            ResultSet chavesGeradas = comando.getGeneratedKeys();
+          
            if(chavesGeradas.next()){
                chavesGeradas.getInt(1);
            }
