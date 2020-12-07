@@ -18,6 +18,16 @@ import java.util.List;
  */
 public class ItemProdutoDAO {
     
+     private Connection connection;
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+    
     public static void inserir(Produto item)throws Exception{
         String sql = "INSERT INTO produto (produto, cor, marca, estoque, preco) VALUES (?, ?, ?, ?, ?)";
         

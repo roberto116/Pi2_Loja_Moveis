@@ -25,7 +25,7 @@ public class ItemVendaDAO {
             PreparedStatement comando = conexao.prepareStatement(sql);
             
             comando.setInt(1, item.idcliente);
-            comando.setDate(2, (Date) item.datavenda);
+            comando.setDate(2, Date.valueOf( item.datavenda));
             
             
         }finally{

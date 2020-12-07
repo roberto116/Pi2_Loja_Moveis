@@ -19,6 +19,15 @@ import java.util.List;
  * @author Beto
  */
 public class ClienteDAO {
+     private Connection connection;
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
     public static void inserir(Cliente item)throws Exception{
         String sql = "INSERT INTO cliente (nome, sobrenome, datanascimento, rg, cpf, telefone, celular, email, rua, "
                 + "numero, bairro, complementos, uf, cep, genero, cidade, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

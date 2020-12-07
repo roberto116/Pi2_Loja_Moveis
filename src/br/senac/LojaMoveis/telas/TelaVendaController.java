@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package br.senac.LojaMoveis.telas;
-//import br.senac.LojaMoveis.bd.ItemProdutoDAO;
-//import br.senac.LojaMoveis.registros.Produto;
-//import br.senac.LojaMoveis.registros.Vendas;
-//import br.senac.LojaMoveis.registros.Vendas_Produtos;
+import br.senac.LojaMoveis.bd.ItemProdutoDAO;
+import br.senac.LojaMoveis.registros.Produto;
+import br.senac.LojaMoveis.registros.Vendas;
+import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import br.senac.LojaMoveis.bd.ClienteDAO;
 import br.senac.LojaMoveis.bd.ItemProdutoDAO;
 import br.senac.LojaMoveis.bd.ItemVendaDAO;
@@ -93,7 +93,7 @@ public class TelaVendaController implements Initializable {
         colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
         colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
         colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
-        colunaQuantidade.setCellValueFactory(new PropertyValueFactory("estoque"));
+        colunaQuantidade.setCellValueFactory(new PropertyValueFactory("quantidade"));
         colunaValor.setCellValueFactory(new PropertyValueFactory("preco"));
         
         colunaNome.setCellValueFactory(new PropertyValueFactory("nome"));
@@ -117,7 +117,7 @@ public class TelaVendaController implements Initializable {
             Cliente clienSelecionado = tabelaCliente.getSelectionModel().getSelectedItem();
             
             LocalDate dataDigitada = dtData.getValue();
-            venda.datavenda = java.sql.Date.valueOf(dataDigitada);
+            //venda.datavenda = java.sql.Date.valueOf(dataDigitada);
             
             venda.idcliente = clienSelecionado.id;         
             item.idProduto = itemSelecionado.id;
@@ -301,17 +301,16 @@ public class TelaVendaController implements Initializable {
         Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         String Prod = itemSelecionado.produto;
         
-        List<String> carrinho = new ArrayList();
+        List<String> carrinho1 = new ArrayList();
+        carrinho1.add(Prod);
+       
+
+        List<String> carrinho2 = new ArrayList();
+        carrinho2.add(Prod);
         
-        for(int i = 0; i < carrinho.size();i++) 
-        {
-            carrinho.add(Prod);
-            
-        }
-            String Adicionar = "" + carrinho;
-            tfCarrinho.setText(Adicionar);
-        
-        
+        String Adicionar = "" + carrinho1 + carrinho2;
+        tfCarrinho.setText(Adicionar);
+               
        
     }
         

@@ -15,12 +15,50 @@ public class Vendas_Produtos {
     public int idProduto;
     public int quantidade;
     public double total;
+    private Produto produto;
+    private Vendas venda;
          
-        public int getQuantidade(){
+      public Vendas_Produtos() {
+    }
+
+    public int getIdvenda() {
+        return idvenda;
+    }
+
+    public void setIdvenda(int idvenda) {
+        this.idvenda = idvenda;
+    }
+
+    public int getQuantidade() {
         return quantidade;
     }
-        public double getTotal(){
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    public double getTotal() {
         return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Vendas getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Vendas venda) {
+        this.venda = venda;
     }
     
 }
