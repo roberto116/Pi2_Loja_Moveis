@@ -67,16 +67,6 @@ public class TelaVendaController implements Initializable {
     @FXML
     private TableColumn<Cliente, String> colunaSobrenome;
     @FXML
-    private TableColumn<Cliente, Integer> colunaRg;
-    @FXML
-    private TableColumn<Cliente, Integer> colunaCpf;
-    @FXML
-    private TableColumn<Cliente, Integer> colunaTelefone;
-    @FXML
-    private TableColumn<Cliente, Integer> colunaCelular;
-    @FXML
-    private TableColumn<Cliente, String> colunaCidade;
-    @FXML
     private TextField tfPesquisarProd;
     @FXML
     private TextField tfPesquisaCliente;
@@ -87,15 +77,11 @@ public class TelaVendaController implements Initializable {
     @FXML
     private DatePicker dtData;
     @FXML
-    private TextField tfIdProd;
-    @FXML
-    private TextField tfIdCliente;
-    @FXML
     private TableColumn<Cliente, Integer> colunaIdClien;
     @FXML
     private TableColumn<Produto, Integer> colunaIdProd;
     
-    
+     List<Vendas_Produtos> carrinho = new ArrayList();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -123,23 +109,28 @@ public class TelaVendaController implements Initializable {
     private void finalizar(ActionEvent event) {
         
        
-            Vendas_Produtos item = new Vendas_Produtos();
+            
             Vendas venda = new Vendas();
             Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
             Cliente clienSelecionado = tabelaCliente.getSelectionModel().getSelectedItem();
+            int idclint = clienSelecionado.id;
             
             LocalDate dataDigitada = dtData.getValue();
             venda.datavenda = Date.valueOf(dataDigitada);            
-            venda.idcliente = Integer.parseInt(tfIdCliente.getText());   
+            venda.idcliente = idclint;   
             
-            item.idProduto = Integer.parseInt(tfIdProd.getText());
-            item.idvenda = 
-            item.quantidade = Integer.parseInt(tfQtd.getText());
-            item.total = Double.parseDouble(tfValorTotal.getText());
+           
             
       try{
-            ItemVendaDAO.inserirVendas(venda);
-            ItemVendas_ProdutosDAO.inserirVendasProdutos(item);
+            int idVenda = ItemVendaDAO.inserirVendas(venda);
+            
+            for(int i = 0;i< carrinho.size();i++)
+            {
+                  
+                 ItemVendas_ProdutosDAO.inserirVendasProdutos(carrinho.get(i),idVenda);
+                 
+            }
+        
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Inserir");
             alert.setHeaderText("Inserido com Sucesso");
@@ -279,15 +270,15 @@ public class TelaVendaController implements Initializable {
     {
         Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         String Prod = itemSelecionado.produto;
+           Vendas_Produtos item = new Vendas_Produtos();
+                  item.idProduto = itemSelecionado.id;
+                  item.quantidade = Integer.parseInt(tfQtd.getText());
+                  item.total = Double.parseDouble(tfValorTotal.getText());                            
+       
+        carrinho.add(item);
         
-         
-        
-        List<String> carrinho = new ArrayList();
-                     
-        carrinho.add(Prod);
-        
-        String Adicionar = "" + carrinho;
-        tfCarrinho.setText(Adicionar);
+        String Adicionar = "" + Prod;
+        tfCarrinho.setText(tfCarrinho.getText()+ ", " +Adicionar);
                
        
     }

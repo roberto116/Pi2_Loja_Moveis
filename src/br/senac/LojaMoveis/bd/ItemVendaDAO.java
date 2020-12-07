@@ -17,7 +17,7 @@ import java.sql.ResultSet;
  * @author Lenovo
  */
 public class ItemVendaDAO {
-    public static void inserirVendas(Vendas item)throws Exception{
+    public static int inserirVendas(Vendas item)throws Exception{
         String sql = "insert into vendas(idcliente,datavenda) VALUES (?, ?)";
         
         Connection conexao = ConnectionUtils.getConnection();
@@ -34,7 +34,8 @@ public class ItemVendaDAO {
            ResultSet chavesGeradas = comando.getGeneratedKeys();
           
            if(chavesGeradas.next()){
-               chavesGeradas.getInt(1);
+             return  chavesGeradas.getInt(1);
+               
            }
                
         
@@ -43,7 +44,7 @@ public class ItemVendaDAO {
         }finally{
             conexao.close();
         }
-
+        return -1;
     }
    }
     

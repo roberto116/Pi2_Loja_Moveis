@@ -15,15 +15,15 @@ import java.sql.PreparedStatement;
  * @author Lenovo
  */
 public class ItemVendas_ProdutosDAO {
-      public static void inserirVendasProdutos(Vendas_Produtos item)throws Exception{
-        String sql = "insert into vendas(idvenda,idProduto,quantidade,total) VALUES (?, ?, ?, ?)";
+      public static void inserirVendasProdutos(Vendas_Produtos item,int idVenda)throws Exception{
+        String sql = "insert into vendas_produtos(idvenda,idProduto,quantidade,total) VALUES (?, ?, ?, ?)";
         
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
             PreparedStatement comando = conexao.prepareStatement(sql);
             
-            comando.setInt(1, item.idvenda);
+            comando.setInt(1, idVenda);
             comando.setInt(2, item.idProduto);
             comando.setInt(3, item.quantidade);
             comando.setDouble(4, item.total);
