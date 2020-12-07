@@ -96,6 +96,7 @@ public class TelaProdutoController implements Initializable {
         int qtd = 0;
         
         if(tfProduto.getText().isEmpty() || tfCor.getText().isEmpty() || tfMarca.getText().isEmpty()){
+            alert("Erro", "Campos vazios", Alert.AlertType.ERROR);
             return false;
         }
         
@@ -120,6 +121,7 @@ public class TelaProdutoController implements Initializable {
             preco = Double.parseDouble(tfValor.getText());
             
         }catch(Exception e){
+            alert("Erro", "Letras no lugar de numeros", Alert.AlertType.ERROR);
             return false;
         }
         
