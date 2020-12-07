@@ -10,6 +10,7 @@ import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -22,10 +23,20 @@ public class ItemVendaDAO {
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
-            PreparedStatement comando = conexao.prepareStatement(sql);
+            PreparedStatement comando = conexao.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             
             comando.setInt(1, item.idcliente);
-            comando.setDate(2, Date.valueOf( item.datavenda));
+            comando.setDate(2, (Date)( item.datavenda));
+            
+            comando.execute();
+            
+            
+           ResultSet chavesGeradas = comando.getGeneratedKeys();
+           if(chavesGeradas.next()){
+               chavesGeradas.getInt(1);
+           }
+               
+        
             
             
         }finally{

@@ -17,18 +17,11 @@ public class Vendas {
     
     public int id;
     public int idcliente;
-    public LocalDate datavenda;
+    public Date datavenda;
     private List<Vendas_Produtos> itensDeVenda;
     private Cliente cliente;
 
    
-    public Vendas() {
-    }
-
-    public Vendas(int id, LocalDate datavenda) {
-        this.id = id;
-        this.datavenda = datavenda;
-            }
 
     public int getId() {
         return id;
@@ -38,11 +31,11 @@ public class Vendas {
         this.id = id;
     }
 
-    public LocalDate getDatavenda() {
+    public Date getDatavenda() {
         return datavenda;
     }
 
-    public void setData(LocalDate datavenda) {
+    public void setData(Date datavenda) {
         this.datavenda = datavenda;
     }
 

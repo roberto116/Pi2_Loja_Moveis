@@ -59,7 +59,7 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     private void abrirTelaVenda(ActionEvent event) throws IOException {
-        URL url = getClass().getResource("/br/senac/LojaMoveis/telas/TelaVendas.fxml");
+        URL url = getClass().getResource("/br/senac/LojaMoveis/telas/TelaVenda.fxml");
             
         Parent TelaPrincipal = FXMLLoader.load(url);
         Scene scene = new Scene(TelaPrincipal);

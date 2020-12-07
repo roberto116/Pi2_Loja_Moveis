@@ -28,6 +28,8 @@ public class ItemVendas_ProdutosDAO {
             comando.setInt(3, item.quantidade);
             comando.setDouble(4, item.total);
             
+            comando.execute();
+            
         }finally{
             conexao.close();
         }

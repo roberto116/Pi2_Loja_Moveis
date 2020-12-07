@@ -17,11 +17,11 @@ import br.senac.LojaMoveis.registros.Produto;
 import br.senac.LojaMoveis.registros.Vendas;
 import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import java.net.URL;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -47,7 +47,7 @@ public class TelaVendaController implements Initializable {
     @FXML
     private TextField tfQtd;
     @FXML
-    private Label tfValorTotal;
+    private TextField tfValorTotal;
     @FXML
     private TableView<Produto> tabelaProduto;
     @FXML
@@ -86,16 +86,29 @@ public class TelaVendaController implements Initializable {
     private Label tfCarrinho;
     @FXML
     private DatePicker dtData;
+    @FXML
+    private TextField tfIdProd;
+    @FXML
+    private TextField tfIdCliente;
+    @FXML
+    private TableColumn<Cliente, Integer> colunaIdClien;
+    @FXML
+    private TableColumn<Produto, Integer> colunaIdProd;
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         
+        colunaIdProd.setCellValueFactory(new PropertyValueFactory("id"));
         colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
         colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
         colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
-        colunaQuantidade.setCellValueFactory(new PropertyValueFactory("quantidade"));
+        colunaQuantidade.setCellValueFactory(new PropertyValueFactory("estoque"));
         colunaValor.setCellValueFactory(new PropertyValueFactory("preco"));
         
+        colunaIdClien.setCellValueFactory(new PropertyValueFactory("id"));
         colunaNome.setCellValueFactory(new PropertyValueFactory("nome"));
         colunaSobrenome.setCellValueFactory(new PropertyValueFactory("sobrenome"));
         colunaRg.setCellValueFactory(new PropertyValueFactory("rg"));
@@ -103,6 +116,9 @@ public class TelaVendaController implements Initializable {
         colunaTelefone.setCellValueFactory(new PropertyValueFactory("telefone"));
         colunaCelular.setCellValueFactory(new PropertyValueFactory("celular"));
         colunaCidade.setCellValueFactory(new PropertyValueFactory("cidade"));
+        
+        LocalDate hoje = LocalDate.now();
+        dtData.setValue(hoje);
        
     }    
        
@@ -117,10 +133,10 @@ public class TelaVendaController implements Initializable {
             Cliente clienSelecionado = tabelaCliente.getSelectionModel().getSelectedItem();
             
             LocalDate dataDigitada = dtData.getValue();
-            //venda.datavenda = java.sql.Date.valueOf(dataDigitada);
+            venda.datavenda = Date.valueOf(dataDigitada);            
+            venda.idcliente = Integer.parseInt(tfIdCliente.getText());   
             
-            venda.idcliente = clienSelecionado.id;         
-            item.idProduto = itemSelecionado.id;
+            item.idProduto = Integer.parseInt(tfIdProd.getText());
             item.idvenda = venda.id;
             item.quantidade = Integer.parseInt(tfQtd.getText());
             item.total = Double.parseDouble(tfValorTotal.getText());
@@ -146,38 +162,9 @@ public class TelaVendaController implements Initializable {
     }
 
     
-    private void pesquisar(ActionEvent event) {
-        if(tfPesquisarProd.getText().equals("")){
-            try{
-                List<Produto> resultado = ItemProdutoDAO.listar();
+   
 
-                tabelaProduto.setItems(FXCollections.observableArrayList(resultado));
-                tabelaProduto.refresh();
-                
-            }catch(Exception e){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Pesquisar");
-                alert.setHeaderText("Falha ao Pesquisar");
-                alert.setContentText("Click em OK para continuar");
-                alert.showAndWait();
-            }
-        }
-        else {
-            try{
-                List<Produto> resultado = ItemProdutoDAO.pesquisar(tfPesquisarProd.getText());
-
-                tabelaProduto.setItems(FXCollections.observableArrayList(resultado));
-                tabelaProduto.refresh();
-                
-            }catch(Exception e){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Pesquisar");
-                alert.setHeaderText("Falha ao Pesquisa");
-                alert.setContentText("Click em OK para continuar");
-                alert.showAndWait();
-            }  
-}
-    }          
+              
 
     @FXML
     private void calcular(ActionEvent event)
@@ -301,14 +288,13 @@ public class TelaVendaController implements Initializable {
         Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         String Prod = itemSelecionado.produto;
         
-        List<String> carrinho1 = new ArrayList();
-        carrinho1.add(Prod);
-       
-
-        List<String> carrinho2 = new ArrayList();
-        carrinho2.add(Prod);
+         
         
-        String Adicionar = "" + carrinho1 + carrinho2;
+        List<String> carrinho = new ArrayList();
+                     
+        carrinho.add(Prod);
+        
+        String Adicionar = "" + carrinho;
         tfCarrinho.setText(Adicionar);
                
        

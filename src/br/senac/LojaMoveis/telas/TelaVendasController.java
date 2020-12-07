@@ -78,7 +78,7 @@ public class TelaVendasController implements Initializable {
 
     //Atributos para manipulação de Banco de Dados
    
-    
+   // private final Connection conexao = ConnectionUtils.getConnection();
     private final ConnectionUtils connection = new ConnectionUtils();
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final ItemProdutoDAO produtoDAO = new ItemProdutoDAO();
@@ -92,16 +92,12 @@ public class TelaVendasController implements Initializable {
         
            
             
-        try {
-            carregarComboBoxClientes();
-        } catch (Exception ex) {
-            Logger.getLogger(TelaVendasController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            carregarComboBoxProdutos();
-        } catch (Exception ex) {
-            Logger.getLogger(TelaVendasController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     
+            carregarComboBoxClientes(connection);
+       
+     
+            carregarComboBoxProdutos(connection);
+       
             colunaProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
             colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
             colunaValor.setCellValueFactory(new PropertyValueFactory<>("preco"));
@@ -167,7 +163,7 @@ public class TelaVendasController implements Initializable {
     public void handleButtonConfirmar() {
         if (validarEntradaDeDados()) {
             venda.setCliente((Cliente) comboBoxCliente.getSelectionModel().getSelectedItem());            
-            venda.setData(datePickerData.getValue());
+           // venda.setData(datePickerData.getValue());
             buttonConfirmarClicked = true;
             dialogStage.close();
         }
@@ -202,5 +198,15 @@ public class TelaVendasController implements Initializable {
             return false;
         }
     }
+
+    private void carregarComboBoxClientes(ConnectionUtils connection) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void carregarComboBoxProdutos(ConnectionUtils connection) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
     
 }
