@@ -5,13 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="290.0" prefWidth="457.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="br.senac.LojaMoveis.telas.TelaInicialController">
+<AnchorPane id="AnchorPane" prefHeight="254.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.LojaMoveis.telas.TelaInicialController">
    <children>
       <Button layoutX="96.0" layoutY="98.0" mnemonicParsing="false" onAction="#abrirTelaCliente" prefHeight="25.0" prefWidth="277.0" text="Cliente" />
       <Button layoutX="96.0" layoutY="139.0" mnemonicParsing="false" onAction="#abrirTelaProduto" prefHeight="25.0" prefWidth="277.0" text="Produto" />
       <Button layoutX="96.0" layoutY="186.0" mnemonicParsing="false" onAction="#abrirTelaVenda" prefHeight="25.0" prefWidth="277.0" text="Venda" />
-      <Button layoutX="96.0" layoutY="230.0" mnemonicParsing="false" onAction="#abrirTelaRelatorio" prefHeight="25.0" prefWidth="277.0" text="Relatório" />
       <Label layoutX="186.0" layoutY="36.0" text="Menu">
          <font>
             <Font name="Sitka Text Bold Italic" size="36.0" />
