@@ -6,8 +6,8 @@
 package br.senac.LojaMoveis.registros;
 
 /**
- *
- * @author Beto
+ * Aqui foi feito um registro do Produto onde cada variavel foi criada 
+ * diacordo com a tabela Produto no bd
  */
 public class Produto {
     public int id;
@@ -16,6 +16,9 @@ public class Produto {
     public String marca;
     public int estoque;
     public double preco;
+    
+    //aqui esta deixano publico as variaves da classe Produto para que 
+    //possa ser usada em outra classe
     
        public String getProduto(){
         return produto;

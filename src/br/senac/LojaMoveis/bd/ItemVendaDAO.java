@@ -18,32 +18,35 @@ import java.sql.ResultSet;
  */
 public class ItemVendaDAO {
     public static int inserirVendas(Vendas item)throws Exception{
+        //comando SQL para inserir vendas na tabela vendas
         String sql = "insert into vendas(idcliente,datavenda) VALUES (?, ?)";
         
+        //criando conexão com o bd
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
+            //preparando comando sql com o retorno de uma chave
             PreparedStatement comando = conexao.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-            
+            //dados que serão inseridos
             comando.setInt(1, item.idcliente);
             comando.setDate(2, (Date)( item.datavenda));
             
             comando.execute();
             
-            
+           //ResultSet para consultar a chave 
            ResultSet chavesGeradas = comando.getGeneratedKeys();
-          
-           if(chavesGeradas.next()){
-             return  chavesGeradas.getInt(1);
-               
+           
+           //Se tiver chavesGeradas
+            if(chavesGeradas.next()){
+              //retornando a chave gerada
+              return  chavesGeradas.getInt(1);  
            }
                
-        
-            
-            
         }finally{
+            //fechando conexão com o bd
             conexao.close();
         }
+        //retornando '-1'
         return -1;
     }
    }

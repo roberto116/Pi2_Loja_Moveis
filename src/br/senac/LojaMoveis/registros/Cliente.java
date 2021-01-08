@@ -8,8 +8,8 @@ package br.senac.LojaMoveis.registros;
 import java.util.Date;
 
 /**
- *
- * @author lenovo
+ * Aqui foi feito um registro do cliente onde cada variavel foi criada 
+ * diacordo com a tabela Cliente no bd
  */
 public class Cliente {
     public int id;
@@ -30,6 +30,9 @@ public class Cliente {
     public String uf;
     public int celular;
     public String genero;
+    
+    //aqui esta deixano publico as variaves da classe cliente para que 
+    //possa ser usada em outra classe
     
        public String getNome(){
         return nome;

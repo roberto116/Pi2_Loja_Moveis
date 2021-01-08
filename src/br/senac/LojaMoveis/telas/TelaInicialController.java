@@ -30,7 +30,7 @@ public class TelaInicialController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
-
+    //função privada que abri a tela Cliente
     @FXML
     private void abrirTelaCliente(ActionEvent event) throws Exception {
         URL url = getClass().getResource("/br/senac/LojaMoveis/telas/TelaCliente.fxml");
@@ -43,7 +43,8 @@ public class TelaInicialController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    //função privada que abri a tela Produto
     @FXML
     private void abrirTelaProduto(ActionEvent event) throws Exception {
         URL url = getClass().getResource("/br/senac/LojaMoveis/telas/TelaProduto.fxml");
@@ -57,6 +58,7 @@ public class TelaInicialController implements Initializable {
         stage.show();
     }
 
+    //funcão pricada que abri a tela Venda
     @FXML
     private void abrirTelaVenda(ActionEvent event) throws IOException {
         URL url = getClass().getResource("/br/senac/LojaMoveis/telas/TelaVenda.fxml");

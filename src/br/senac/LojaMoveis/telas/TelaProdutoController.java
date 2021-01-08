@@ -64,6 +64,10 @@ public class TelaProdutoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /**
+         * está sendo inicializado assim que abri a tela de Produto
+         * todas as colunas da tabela
+         */
         colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
         colunaCor.setCellValueFactory(new PropertyValueFactory("cor"));
         colunaMarca.setCellValueFactory(new PropertyValueFactory("marca"));
@@ -73,16 +77,21 @@ public class TelaProdutoController implements Initializable {
 
     @FXML
     private void limparCampos(ActionEvent event) {
+        // aqui esta limpando os dados digitados nas textField
         tfProduto.clear();
         tfCor.clear();
         tfMarca.clear();
         tfQuantidade.clear();
         tfValor.clear();
         
+        //botão recebe o nome Inserir
         btnSalvar.setText("Inserir");
+        
+        //variavel global recebe false
         editMode = false;
     }
     
+    //função feita para dar os alertas para o usuario
      void alert (String title, String msg, Alert.AlertType type){
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -90,15 +99,23 @@ public class TelaProdutoController implements Initializable {
         alert.showAndWait();
     }
     
+    //função feita para validar os dados digitados
     boolean validarProduto(){
         int quantidade = 0;
         double preco = 0;
         int qtd = 0;
         
+        //se alguma dessas variaveis estiver vazias sera retornado 'false' 
         if(tfProduto.getText().isEmpty() || tfCor.getText().isEmpty() || tfMarca.getText().isEmpty()){
             alert("Erro", "Campos vazios", Alert.AlertType.ERROR);
             return false;
         }
+        
+        /**
+         * Aqui esta propramado para validar uma por uma para não dar erro ou 
+         * conflito com o bd. Nessa validação o sistema ver a quantidade de caracteres 
+         * diacordo com o bd, se ultrapassar o valor definido a função retorna 'False'
+         */
         
         qtd = tfProduto.getText().length();
             if(qtd > 40){
@@ -116,6 +133,12 @@ public class TelaProdutoController implements Initializable {
                 return false;
             }
         
+         /**
+         * nessa try-catch esta fazendo a validação para que se alguma campo que
+         * deveria so receber valor numerico receber String, vai ser lançado 
+         * uma alerta para o usuario e a função retornar 'false'
+         */
+            
         try{
             quantidade = Integer.parseInt(tfQuantidade.getText());
             preco = Double.parseDouble(tfValor.getText());
@@ -124,27 +147,40 @@ public class TelaProdutoController implements Initializable {
             alert("Erro", "Letras no lugar de numeros", Alert.AlertType.ERROR);
             return false;
         }
-        
+        //caso não entre em nenhum if ou try-catch a fução retorna true
         return true;
     }
 
     @FXML
     private void inserir(ActionEvent event) {
+        /**
+         * nesse if a variavel 'edition' serve para decidir se a função é para
+         * Inserir ou editar. se for false é para inserir e se for true é para
+         * editar
+         */
         if(!editMode){
-            
+            /**
+            * se a fução ValidarProduto retorna false, então não sera executado 
+            * nada. 
+            */
             if(validarProduto() == false){
                 return;
             }
             
+            //instanciando 'Produto'
             Produto item = new Produto();
-        
+            
+            //pegando a digitação do usuario
             item.produto = tfProduto.getText();
             item.cor = tfCor.getText();
             item.marca = tfMarca.getText();
             item.estoque = Integer.parseInt(tfQuantidade.getText());
             item.preco = Double.parseDouble(tfValor.getText());
             
-
+            /**
+            * chamando a função que ira inserir no bd passando o 'item'
+            * como parametro
+            */
         try{
             ItemProdutoDAO.inserir(item);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -154,6 +190,7 @@ public class TelaProdutoController implements Initializable {
             alert.showAndWait();
             
         }catch(Exception e){
+            //caso de um erro sera inviado uma mensagem para o usuario
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Inserir");
@@ -163,16 +200,25 @@ public class TelaProdutoController implements Initializable {
         }
             
         }else{
-            
+            /**
+            * se a fução ValidarProduto retorna false, então não sera executado 
+            * nada. 
+            */
             if(validarProduto() == false){
                 return;
             }
             
+            //pegando a digitação do usuario
             itemProdutoEdicao.produto = tfProduto.getText();
             itemProdutoEdicao.cor = tfCor.getText();
             itemProdutoEdicao.marca = tfMarca.getText();
             itemProdutoEdicao.estoque = Integer.parseInt(tfQuantidade.getText());
             itemProdutoEdicao.preco = Double.parseDouble(tfValor.getText());
+            
+            /**
+            * chamando a função que ira editar no bd passando o 'itemProdutoEdicao'
+            * como parametro
+            */
             
             try {
                 ItemProdutoDAO.editar(itemProdutoEdicao);
@@ -191,6 +237,7 @@ public class TelaProdutoController implements Initializable {
                 alert.showAndWait();
             } 
         }
+        //função limparCampos e pesquisar é executada
         limparCampos(event);
         pesquisar(event);
         
@@ -198,7 +245,12 @@ public class TelaProdutoController implements Initializable {
 
     @FXML
     private void pesquisar(ActionEvent event) {
+        //caso não tenha nada digitado na tfPesquisa sera listado todos os registros
         if(tfPesquisar.getText().equals("")){
+            /**
+             * no try=catch é criado uma lista com o 'Produto' como parametro 
+             * pegando a lista que vem do ProdutoDAO função Listar
+             */
             try{
                 List<Produto> resultado = ItemProdutoDAO.listar();
 
@@ -206,6 +258,7 @@ public class TelaProdutoController implements Initializable {
                 tabelaProduto.refresh();
                 
             }catch(Exception e){
+                //caso de um erro sera exibido uma mensagem para o usuario
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Pesquisar");
@@ -215,6 +268,10 @@ public class TelaProdutoController implements Initializable {
             }
         }
         else {
+            /**
+             * caso tenha algo digitado na tfPesquisa sera feito uma consulta. 
+             * a lista 'Produto' recebe a lista que vem do ProdutoDAO função pesquisar
+             */
             try{
                 List<Produto> resultado = ItemProdutoDAO.pesquisar(tfPesquisar.getText());
 
@@ -234,26 +291,40 @@ public class TelaProdutoController implements Initializable {
 
     @FXML
     private void editar(ActionEvent event) {
+        //recebera os dados do produto selecionado 
         Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         
+        //se itemSelecionado for diferente de 'null' então a variavel global
+        //recebe true
         if(itemSelecionado != null){
             editMode = true;
             
+            //variavel global recebe itemSelecionado
             itemProdutoEdicao = itemSelecionado;
             
+            //dados sendo passados para a variavel  itemProdutoEdicao
             tfProduto.setText(itemProdutoEdicao.produto);
             tfCor.setText(itemProdutoEdicao.cor);
             tfMarca.setText(itemProdutoEdicao.marca);
             tfQuantidade.setText(String.valueOf(itemProdutoEdicao.estoque));
             tfValor.setText(String.valueOf(itemProdutoEdicao.preco));            
             
+            // botão recebe o nome 'Salvar'
             btnSalvar.setText("Salvar");
         }
     }
 
     @FXML
     private void excluir(ActionEvent event) {
+        //recebera os dados do produto selecionado
         Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+        
+        /**
+         * se itemSelecionado for diferente de 'null' então sera exibido para 
+         * o usuario uma botão para confirmar ou cancelar. Se o usuario apertar 
+         * 'ok' então no try-catch sera chamado a funcão excluir do ProdutoDAO 
+         * passando como parametro o id do registro.
+         */
         
         if(itemSelecionado != null){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -277,6 +348,7 @@ public class TelaProdutoController implements Initializable {
                     alert.showAndWait();
                 } 
             }
+            //sera executado a função pesquisar
             pesquisar(event);
         }
     }

@@ -95,6 +95,10 @@ public class TelaClienteController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /**
+         * está sendo inicializado assim que abri a tela de cliente 
+         * todas as colunas da tabela e a data do dia presente na datePicker 
+         */
         colunaNome.setCellValueFactory(new PropertyValueFactory("nome"));
         colunaSobrenome.setCellValueFactory(new PropertyValueFactory("sobrenome"));
         colunaRg.setCellValueFactory(new PropertyValueFactory("rg"));
@@ -109,6 +113,7 @@ public class TelaClienteController implements Initializable {
 
     @FXML
     private void limparCampos(ActionEvent event) {
+        // aqui esta limpando os dados digitados nas textField
         tfNome.clear();
         tfSobrenome.clear();
         tfRg.clear();
@@ -125,10 +130,12 @@ public class TelaClienteController implements Initializable {
         tfUf.clear();
         tfCelular.clear();
         tfGenero.clear();
-        
+        //botão recebe o nome Inserir
         btnSalvar.setText("Inserir");
+        //variavel global recebe false
+        edition = false;
     }
-    
+    //função feita para dar os alertas para o usuario
     void alert (String title, String msg, AlertType type){
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -136,10 +143,12 @@ public class TelaClienteController implements Initializable {
         alert.showAndWait();
     }
     
+    //função feita para validar os dados digitados
     boolean validarCliente(){
         int telefone, celular, cep, cpf, rg, numero;
         int qtd = 0;
         
+        //se alguma dessas variaveis estiver vazias sera retornado 'false' 
         if(tfNome.getText().isEmpty()|| tfSobrenome.getText().isEmpty() || tfEndereco.getText().isEmpty() || tfBairro.getText().isEmpty() || 
            tfCidade.getText().isEmpty() || tfEstadoCivil.getText().isEmpty() || tfEmail.getText().isEmpty() || tfComplemento.getText().isEmpty() ||
            tfUf.getText().isEmpty() || tfGenero.getText().isEmpty()){
@@ -152,6 +161,11 @@ public class TelaClienteController implements Initializable {
            
            return false; 
         }
+        /**
+         * Aqui esta propramado para validar uma por uma para não dar erro ou 
+         * conflito com o bd. Nessa validação o sistema ver a quantidade de caracteres 
+         * diacordo com o bd, se ultrapassar o valor definido a função retorna 'False'
+         */
         qtd = tfNome.getText().length();
             if(qtd > 15){
                 alert("Erro", "'Nome' ultrapasso o limite de caracteres", AlertType.ERROR);
@@ -228,6 +242,11 @@ public class TelaClienteController implements Initializable {
                 return false;
             }
         
+        /**
+         * nessa try-catch esta fazendo a validação para que se alguma campo que
+         * deveria so receber valor numerico receber String, vai ser lançado 
+         * uma alerta para o usuario e a função retornar 'false'
+         */
         try{
             telefone = Integer.parseInt(tfTelefone.getText());
             celular = Integer.parseInt(tfCelular.getText());
@@ -244,21 +263,30 @@ public class TelaClienteController implements Initializable {
                 alert.showAndWait();
             return false;
         }
-        
+        //caso não entre em nenhum if ou try-catch a fução retorna true
         return true;     
     }
 
     @FXML
     private void inserir(ActionEvent event) {
-        
+        /**
+         * nesse if a variavel 'edition' serve para decidir se a função é para
+         * Inserir ou editar. se for false é para inserir e se for true é para
+         * editar
+         */
         if(!edition){
-           
+           /**
+            * se a fução ValidarCliente retorna false, então não sera executado 
+            * nada. 
+            */
             if(validarCliente() == false){
                 return;
             }
             
+            //instanciando 'Cliente'
             Cliente cliente = new Cliente();
-        
+            
+            //pegando a digitação do usuario
             cliente.nome = tfNome.getText();
             cliente.sobrenome = tfSobrenome.getText();
             cliente.rg = Integer.parseInt(tfRg.getText());
@@ -279,7 +307,11 @@ public class TelaClienteController implements Initializable {
             LocalDate dataDigitada = data.getValue();
             cliente.nascimento = Date.valueOf(dataDigitada);
 
-             try{
+            /**
+            * chamando a função que ira inserir no bd passando o 'Cliente'
+            * como parametro
+            */
+            try{
                 ClienteDAO.inserir(cliente);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Inserir");
@@ -288,6 +320,7 @@ public class TelaClienteController implements Initializable {
                 alert.showAndWait();
 
             }catch(Exception e){
+                //caso de um erro sera inviado uma mensagem para o usuario
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Inserir");
@@ -297,10 +330,14 @@ public class TelaClienteController implements Initializable {
             }
              
         }else{
+            /**
+            * se a fução ValidarCliente retorna false, então não sera executado 
+            * nada. 
+            */
             if(validarCliente() == false){
                 return;
             }
-            
+            //pegando a digitação do usuario
             clienteEdition.nome = tfNome.getText();
             clienteEdition.sobrenome = tfSobrenome.getText();
             clienteEdition.rg = Integer.parseInt(tfRg.getText());
@@ -321,6 +358,10 @@ public class TelaClienteController implements Initializable {
             LocalDate dataDigitada = data.getValue();
             clienteEdition.nascimento = Date.valueOf(dataDigitada);
             
+            /**
+            * chamando a função que ira editar no bd passando o 'Cliente'
+            * como parametro
+            */
             try{
                 ClienteDAO.editar(clienteEdition);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -330,6 +371,7 @@ public class TelaClienteController implements Initializable {
                 alert.showAndWait();
                 
             }catch(Exception e){
+                //caso de um erro sera inviado uma mensagem para o usuario
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Salvar");
@@ -338,6 +380,7 @@ public class TelaClienteController implements Initializable {
                 alert.showAndWait();
             }
         }
+        //função limparCampos e pesquisar é executada
         limparCampos(event);
         pesquisar(event);
         
@@ -345,13 +388,18 @@ public class TelaClienteController implements Initializable {
 
     @FXML
     private void editar(ActionEvent event) {
+        //recebera os dados do cliente selecionado 
         Cliente clienteSelecionado = tabelaCliente.getSelectionModel().getSelectedItem();
         
+        //se clienteSelecionado for diferente de 'null' então a variavel global
+        //recebe true
         if(clienteSelecionado != null){
             edition = true;
             
+            //variavel global recebe clienteSelecionado
             clienteEdition = clienteSelecionado;
             
+            //dados sendo passados para a variavel clienteEdition
             tfNome.setText(clienteEdition.nome);
             tfSobrenome.setText(clienteEdition.sobrenome);
             tfRg.setText(String.valueOf(clienteEdition.rg));
@@ -369,14 +417,19 @@ public class TelaClienteController implements Initializable {
             tfCelular.setText(String.valueOf(clienteEdition.celular));
             tfGenero.setText(clienteEdition.genero);
             
-           
+            // botão recebe o nome 'Salvar'
             btnSalvar.setText("Salvar");
         }
     }
 
     @FXML
     private void pesquisar(ActionEvent event) {
+        //caso não tenha nada digitado na tfPesquisa sera listado todos os registros
         if(tfPesquisa.getText().equals("")){
+            /**
+             * no try=catch é criado uma lista com o 'Cliente' como parametro 
+             * pegando a lista que vem do ClienteDAO função Listar
+             */
             try{
                 List<Cliente> cliente =  ClienteDAO.listar();
                 
@@ -384,6 +437,7 @@ public class TelaClienteController implements Initializable {
                 tabelaCliente.refresh();
                 
             }catch(Exception e){
+                //caso de um erro sera exibido uma mensagem para o usuario
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Pesquisar");
@@ -392,6 +446,10 @@ public class TelaClienteController implements Initializable {
                 alert.showAndWait();
             }
         }else{
+            /**
+             * caso tenha algo digitado na tfPesquisa sera feito uma consulta. 
+             * a lista 'cliente' recebe a lista que vem do ClienteDAO função pesquisar
+             */
             try{
                 List<Cliente> cliente = ClienteDAO.pesquisar(tfPesquisa.getText());
                 
@@ -399,6 +457,7 @@ public class TelaClienteController implements Initializable {
                 tabelaCliente.refresh();
                 
             }catch(Exception e){
+                //caso de um erro sera inviado uma mensagem para o usuario
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Pesquisar");
@@ -412,8 +471,15 @@ public class TelaClienteController implements Initializable {
 
     @FXML
     private void excluir(ActionEvent event) {
+        //recebera os dados do cliente selecionado 
         Cliente clienteSelecionado = tabelaCliente.getSelectionModel().getSelectedItem();
         
+        /**
+         * se clienteSelecionado for diferente de 'null' então sera exibido para 
+         * o usuario uma botão para confirmar ou cancelar. Se o usuario apertar 
+         * 'ok' então no try-catch sera chamado a funcão excluir do ClienteDAO 
+         * passando como parametro o id do registro.
+         */
         if(clienteSelecionado != null){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmar Remoção");
@@ -436,6 +502,7 @@ public class TelaClienteController implements Initializable {
                     alert.showAndWait();
                 }
             }
+            //sera executado a função pesquisar
             pesquisar(event);
         }
         

@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.senac.LojaMoveis.registros;
 
 /**
- *
- * @author Lenovo
+ * Aqui foi feito um registro do Vendas_Produtos onde cada variavel foi criada 
+ * diacordo com a tabela Vendas_Produto no bd
  */
 public class Vendas_Produtos {
     
@@ -16,6 +12,9 @@ public class Vendas_Produtos {
     public int quantidade;
     public double total;
          
+    //aqui esta deixano publico as variaves da classe Vendas_Produto para que 
+    //possa ser usada em outra classe
+    
     public int getIdVenda(){
         return idvenda;
     } 

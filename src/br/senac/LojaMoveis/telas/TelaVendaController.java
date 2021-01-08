@@ -81,11 +81,14 @@ public class TelaVendaController implements Initializable {
     @FXML
     private TableColumn<Produto, Integer> colunaIdProd;
     
-     List<Vendas_Produtos> carrinho = new ArrayList();
+    List<Vendas_Produtos> carrinho = new ArrayList();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+         /**
+         * está sendo inicializado assim que abri a tela de vendas
+         * todas as colunas das tabelas
+         */
         
         colunaIdProd.setCellValueFactory(new PropertyValueFactory("id"));
         colunaProduto.setCellValueFactory(new PropertyValueFactory("produto"));
@@ -98,37 +101,43 @@ public class TelaVendaController implements Initializable {
         colunaNome.setCellValueFactory(new PropertyValueFactory("nome"));
         colunaSobrenome.setCellValueFactory(new PropertyValueFactory("sobrenome"));
         
-        
         LocalDate hoje = LocalDate.now();
         dtData.setValue(hoje);
-       
     }    
-       
 
     @FXML
     private void finalizar(ActionEvent event) {
-        
-       
-            
+            //instanciando 'Vendas'
             Vendas venda = new Vendas();
+            
+            //recebera os dados do produto selecionado 
             Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+            
+            //recebera os dados do cliente selecionado 
             Cliente clienSelecionado = tabelaCliente.getSelectionModel().getSelectedItem();
+            
+            //variavel que guarda o id do cliente selecionado
             int idclint = clienSelecionado.id;
             
+            //pegando data da venda e o id do cliente 
             LocalDate dataDigitada = dtData.getValue();
             venda.datavenda = Date.valueOf(dataDigitada);            
             venda.idcliente = idclint;   
             
-           
-            
       try{
+            /**
+             * aqui é guardado o 'id' da venda e inserido no bd com a função do
+             * ItemVendaDAO
+             */
             int idVenda = ItemVendaDAO.inserirVendas(venda);
             
-            for(int i = 0;i< carrinho.size();i++)
+            for(int i = 0; i < carrinho.size();i++)
             {
-                  
-                 ItemVendas_ProdutosDAO.inserirVendasProdutos(carrinho.get(i),idVenda);
-                 
+                /**
+                 * nessa linha é onde é inserido os dados nessesarios da tabela
+                 * vendas_produtos com o id da venda
+                 */ 
+                ItemVendas_ProdutosDAO.inserirVendasProdutos(carrinho.get(i),idVenda);
             }
         
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -145,21 +154,21 @@ public class TelaVendaController implements Initializable {
             alert.setContentText("Click em OK para continuar");
             alert.showAndWait();
         }
-        
     }
-
 
     @FXML
     private void calcular(ActionEvent event)
     {
+        //recebera os dados do produto selecionado 
         Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         
-        
+        //o valor digitado no tfQtd é quardado na variavel valor
         int valor = Integer.parseInt(tfQtd.getText());
         
-       
+        //se valor for menor que o preco do item selecionado e valor for maior que 0
         if(valor < itemSelecionado.preco && valor > 0)
         {
+            //calc recebe o valor do produto e é mostrado na tfValorTotal 
             try{
                 double Calc = itemSelecionado.preco * valor;
         
@@ -177,6 +186,7 @@ public class TelaVendaController implements Initializable {
         }
         else
         {
+            //mensagens de erro 
             try{
              Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Calcular");
@@ -192,13 +202,17 @@ public class TelaVendaController implements Initializable {
                 alert.showAndWait();
             }  
         }
-        
     }
 
     @FXML
     private void pesquisarProd(ActionEvent event) 
     {
+        //caso não tenha nada digitado na tfPesquisa sera listado todos os registros
           if(tfPesquisarProd.getText().equals("")){
+             /**
+             * no try=catch é criado uma lista com o 'Produto' como parametro 
+             * pegando a lista que vem do ProdutoDAO função Listar
+             */
             try{
                 List<Produto> resultado = ItemProdutoDAO.listar();
 
@@ -206,6 +220,7 @@ public class TelaVendaController implements Initializable {
                 tabelaProduto.refresh();
                 
             }catch(Exception e){
+                //caso de um erro sera exibido uma mensagem para o usuario
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Pesquisar");
                 alert.setHeaderText("Falha ao Pesquisar");
@@ -214,6 +229,10 @@ public class TelaVendaController implements Initializable {
             }
         }
         else {
+              /**
+             * caso tenha algo digitado na tfPesquisa sera feito uma consulta. 
+             * a lista 'Produto' recebe a lista que vem do ProdutoDAO função pesquisar
+             */
             try{
                 List<Produto> resultado = ItemProdutoDAO.pesquisar(tfPesquisarProd.getText());
 
@@ -233,7 +252,12 @@ public class TelaVendaController implements Initializable {
     @FXML
     private void pesquisarClie(ActionEvent event) 
     {
+        //caso não tenha nada digitado na tfPesquisa sera listado todos os registros
            if(tfPesquisaCliente.getText().equals("")){
+             /**
+             * no try=catch é criado uma lista com o 'Cliente' como parametro 
+             * pegando a lista que vem do ClienteDAO função Listar
+             */
             try{
                 List<Cliente> resultado = ClienteDAO.listar();
 
@@ -241,6 +265,7 @@ public class TelaVendaController implements Initializable {
                 tabelaCliente.refresh();
                 
             }catch(Exception e){
+                //caso de um erro sera exibido uma mensagem para o usuario
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Pesquisar");
                 alert.setHeaderText("Falha ao Pesquisar");
@@ -249,6 +274,10 @@ public class TelaVendaController implements Initializable {
             }
         }
         else {
+             /**
+             * caso tenha algo digitado na tfPesquisa sera feito uma consulta. 
+             * a lista 'cliente' recebe a lista que vem do ClienteDAO função pesquisar
+             */
             try{
                 List<Cliente> resultado = ClienteDAO.pesquisar(tfPesquisaCliente.getText());
 
@@ -256,6 +285,7 @@ public class TelaVendaController implements Initializable {
                 tabelaCliente.refresh();
                 
             }catch(Exception e){
+                //caso de um erro sera inviado uma mensagem para o usuario
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Pesquisar");
                 alert.setHeaderText("Falha ao Pesquisa");
@@ -268,17 +298,24 @@ public class TelaVendaController implements Initializable {
     @FXML
     private void Carrinho(ActionEvent event) 
     {
+        //recebera os dados do produto selecionado 
         Produto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+        
+        //variavel que recebe o nome do produto
         String Prod = itemSelecionado.produto;
-           Vendas_Produtos item = new Vendas_Produtos();
-                  item.idProduto = itemSelecionado.id;
-                  item.quantidade = Integer.parseInt(tfQtd.getText());
-                  item.total = Double.parseDouble(tfValorTotal.getText());                            
-       
+        
+        //instanciando Vendas_Produtos e pegando os campos necessarios
+            Vendas_Produtos item = new Vendas_Produtos();
+                item.idProduto = itemSelecionado.id;
+                item.quantidade = Integer.parseInt(tfQtd.getText());
+                item.total = Double.parseDouble(tfValorTotal.getText());                            
+        //adicionando na lista 'carrinho' o registro com o 'item' como parametro
         carrinho.add(item);
         
+        //variavel adicionar recebe 'Prod'
         String Adicionar = "" + Prod;
-        tfCarrinho.setText(tfCarrinho.getText()+ ", " +Adicionar);
+        
+        tfCarrinho.setText(tfCarrinho.getText()+ ", " + Adicionar);
                
        
     }

@@ -15,14 +15,19 @@ import java.sql.PreparedStatement;
  * @author Lenovo
  */
 public class ItemVendas_ProdutosDAO {
-      public static void inserirVendasProdutos(Vendas_Produtos item,int idVenda)throws Exception{
+      
+    public static void inserirVendasProdutos(Vendas_Produtos item,int idVenda)throws Exception{
+        //Comando SQL para inserir na tabela vendas_produtos os dados necessarios
         String sql = "insert into vendas_produtos(idvenda,idProduto,quantidade,total) VALUES (?, ?, ?, ?)";
         
+        //criando conexão com o banco 
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
+            //preparando comando sql
             PreparedStatement comando = conexao.prepareStatement(sql);
             
+            //dados que serão inseridos 
             comando.setInt(1, idVenda);
             comando.setInt(2, item.idProduto);
             comando.setInt(3, item.quantidade);
@@ -31,6 +36,7 @@ public class ItemVendas_ProdutosDAO {
             comando.execute();
             
         }finally{
+            //fechando conexão com o bd
             conexao.close();
         }
 

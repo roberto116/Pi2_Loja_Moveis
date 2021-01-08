@@ -21,14 +21,18 @@ import java.util.List;
 public class ClienteDAO {
    
     public static void inserir(Cliente item)throws Exception{
+        //Comando SQL para inserir no bd
         String sql = "INSERT INTO cliente (nome, sobrenome, datanascimento, rg, cpf, telefone, celular, email, rua, "
                 + "numero, bairro, complementos, uf, cep, genero, cidade, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
+        //criando conexão com o bd
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
+            //preparando comando sql
             PreparedStatement comando = conexao.prepareStatement(sql);
             
+            //dados que serão inseridos no bd
             comando.setString(1, item.nome);
             comando.setString(2, item.sobrenome);
             comando.setDate(3, (Date) item.nascimento);
@@ -49,35 +53,44 @@ public class ClienteDAO {
             comando.execute();
             
         }finally{
+            //fechando conexão com o banco
             conexao.close();
         }
     }
     
     public static void excluir(int id) throws Exception{
+        //Comando SQL para deletar um registro no bd
         String sql = "DELETE FROM cliente WHERE id = ?";
         
+        //criando conexão com o banco
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
+            //preparando comando SQL
             PreparedStatement comando = conexao.prepareStatement(sql);
-            
+            //registro que sera excluido do bd
             comando.setInt(1, id);
    
             comando.execute();
         }finally{
+            //fechando conexão com o bd
             conexao.close();
         }
     }
     
     public static void editar(Cliente item) throws Exception{
+        //Comando SQL para editar um registro no bd
         String sql = "UPDATE cliente SET nome = ?, sobrenome = ?, datanascimento = ?, rg = ?, cpf = ?, telefone = ?, celular = ?, email =?, rua = ?, "
                 + "numero = ?, bairro = ?, complementos = ?, uf = ?, cep = ?, genero = ?, cidade = ?, estadoCivil = ? WHERE id = ?"; 
         
+        //Criando conexão com o bd
         Connection conexao = ConnectionUtils.getConnection();
         
         try{
+            //preparando o comando SQL
             PreparedStatement comando = conexao.prepareStatement(sql);
             
+            //dados que serão editados
             comando.setString(1, item.nome);
             comando.setString(2, item.sobrenome);
             comando.setDate(3, (Date) item.nascimento);
@@ -100,24 +113,32 @@ public class ClienteDAO {
             comando.execute();
             
         }finally{
+            //fechando conexão com o bd
             conexao.close();
         }
     }
     
     public static List<Cliente> listar() throws Exception{
+        //comando SQL para listar os registros do bd
         String sql = "SELECT * FROM cliente";
         
+        //Criando conexão com o bd
         Connection conexao = ConnectionUtils.getConnection();
+        //Criando um ArrayList com o parametro 'Cliente'
         List<Cliente> lista = new ArrayList();
         
         try{
+            //preparando comando SQL
             PreparedStatement comando = conexao.prepareStatement(sql);
-            
+            //ResultSet para consultar os dados no bd
             ResultSet dados = comando.executeQuery();
             
+            //Enquanto tiver dados sera executado
             while(dados.next()){
+                //instanciano 'cliente'
                 Cliente item = new Cliente();
                 
+                //dados q serão puxados do bd para listar para o usuario
                 item.id = dados.getInt("id");
                 item.nome = dados.getString("nome");
                 item.sobrenome = dados.getString("sobrenome");
@@ -126,32 +147,39 @@ public class ClienteDAO {
                 item.telefone = dados.getInt("telefone");
                 item.celular = dados.getInt("celular");
                 item.cidade = dados.getString("cidade");
+                //adicionando na ArrayList
                 lista.add(item); 
             }
             
         }finally{
+            //fechando conexão com o bd
             conexao.close();
         }
-        
+        //retornando a lista
         return lista;
     }
     
     public static List<Cliente> pesquisar(String cliente) throws Exception{
+        //Comando SQL que pesquisa um determinado registro
         String sql = "SELECT * FROM cliente WHERE nome LIKE ?";
         
+        //criando conexão com o bd
         Connection conexao = ConnectionUtils.getConnection();
+        //criando uma lista com o parametro 'Cliente'
         List<Cliente> lista = new ArrayList();
         
         try{
+            //preparando comando SQL
             PreparedStatement comando = conexao.prepareStatement(sql);
-            
-            comando.setString(1, "%" + cliente + "%");
-            
+            comando.setString(1, "%" + cliente + "%"); 
             ResultSet dados = comando.executeQuery();
             
+            //Enquanto tiver dados sera executado
             while(dados.next()){
+                //instanciando 'Cliente'
                 Cliente item = new Cliente();
                 
+                //dados q serão consultados no bd
                 item.id = dados.getInt("id");
                 item.nome = dados.getString("nome");
                 item.sobrenome = dados.getString("sobrenome");
@@ -161,14 +189,16 @@ public class ClienteDAO {
                 item.celular = dados.getInt("celular");
                 item.cidade = dados.getString("cidade");
                 
+                //adicionando na lista
                 lista.add(item);
                 
             }
             
         }finally{
+            //fechando conexão com o bd
             conexao.close();
         }
-        
+        //retornando lista
         return lista;
     }
 }

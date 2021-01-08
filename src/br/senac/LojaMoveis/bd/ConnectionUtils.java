@@ -16,12 +16,14 @@ import java.sql.DriverManager;
  */
 public class ConnectionUtils {
  
+    //funcão que é responsavel pela conexão com o banco de dados
     public static Connection getConnection() throws Exception{
-        return DriverManager.getConnection("jdbc:mysql://localhost:3307/projeto_loja_moveis?useTimezone=true&serverTimezone=UTC",
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/projeto_loja_moveis?useTimezone=true&serverTimezone=UTC",
                                            "root",
-                                           "bigobigo");
+                                           "1234");
     }
     
+    //função para testar conexão com o bd
     public static void main(String[] args){
         try{
             getConnection();

@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
- * @author Lenovo
+ * Aqui foi feito um registro do Vendas onde cada variavel foi criada 
+ * diacordo com a tabela Vendas no bd
  */
 public class Vendas {
     
@@ -19,6 +19,9 @@ public class Vendas {
     public int idcliente;
     public Date datavenda;
   
+    //aqui esta deixano publico as variaves da classe Vendas para que 
+    //possa ser usada em outra classe
+    
     public int getId() {
         return id;
     }
