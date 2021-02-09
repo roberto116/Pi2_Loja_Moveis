@@ -39,8 +39,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
- *
- * @author Lenovo
+ *  
+ * Na tela de vendas foi programada para ser usada da seguente forma.
+ * 1 - Primeiro pesquisar o produto e cliente disponivel
+ * 2 - clicar no produto desejavel, digitar a quantidade e clicar em "Calcular Total"
+ * 3 - clicar no cliente que esta dentro da tabela, para definir o comprador 
+ * 4 - clicar em "Adicionar no Carrinho" caso queira mais de um produto 
+ * 5 - seguendo esse passo a passo, para finalizar a compra é so clicar em "Finalizar Compra"
  */
 public class TelaVendaController implements Initializable {
 
@@ -82,6 +87,7 @@ public class TelaVendaController implements Initializable {
     private TableColumn<Produto, Integer> colunaIdProd;
     
     List<Vendas_Produtos> carrinho = new ArrayList();
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -154,6 +160,7 @@ public class TelaVendaController implements Initializable {
             alert.setContentText("Click em OK para continuar");
             alert.showAndWait();
         }
+        
     }
 
     @FXML
@@ -171,7 +178,7 @@ public class TelaVendaController implements Initializable {
             //calc recebe o valor do produto e é mostrado na tfValorTotal 
             try{
                 double Calc = itemSelecionado.preco * valor;
-        
+             
                 String CalcTotal = "" + Calc;
         
                 tfValorTotal.setText(CalcTotal);
@@ -319,10 +326,7 @@ public class TelaVendaController implements Initializable {
                
        
     }
-        
-        
-    
-       
+
 }
     
 

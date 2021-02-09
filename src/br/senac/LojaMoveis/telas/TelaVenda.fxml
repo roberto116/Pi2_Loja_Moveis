@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="563.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.LojaMoveis.telas.TelaVendaController">
+<AnchorPane id="AnchorPane" prefHeight="557.0" prefWidth="1021.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.LojaMoveis.telas.TelaVendaController">
    <children>
-      <Label layoutX="492.0" layoutY="80.0" text="Quantidade Produto" />
-      <TextField fx:id="tfQtd" layoutX="621.0" layoutY="76.0" prefHeight="25.0" prefWidth="72.0" />
-      <Label layoutX="500.0" layoutY="172.0" text="Valor Total:" />
-      <Button layoutX="806.0" layoutY="209.0" mnemonicParsing="false" onAction="#finalizar" prefHeight="39.0" prefWidth="118.0" text="Finalizar Compra" />
-      <TextField fx:id="tfPesquisarProd" layoutX="30.0" layoutY="42.0" prefHeight="25.0" prefWidth="330.0" promptText="Digite e Click em &quot;Pesquisar&quot;" />
-      <Button layoutX="371.0" layoutY="42.0" mnemonicParsing="false" onAction="#pesquisarProd" prefHeight="25.0" prefWidth="82.0" text="Pesquisar" />
+      <Label layoutX="51.0" layoutY="321.0" text="Quantidade Produto" />
+      <TextField fx:id="tfQtd" layoutX="182.0" layoutY="317.0" prefHeight="25.0" prefWidth="72.0" />
+      <Label layoutX="66.0" layoutY="370.0" text="Valor do Produto:" />
+      <Button layoutX="292.0" layoutY="469.0" mnemonicParsing="false" onAction="#finalizar" prefHeight="39.0" prefWidth="118.0" text="Finalizar Compra" />
+      <TextField fx:id="tfPesquisarProd" layoutX="30.0" layoutY="42.0" prefHeight="25.0" prefWidth="331.0" promptText="Digite e Click em &quot;Pesquisar&quot;" />
+      <Button layoutX="378.0" layoutY="42.0" mnemonicParsing="false" onAction="#pesquisarProd" prefHeight="25.0" prefWidth="99.0" text="Pesquisar" />
       <TableView fx:id="tabelaProduto" layoutX="30.0" layoutY="80.0" prefHeight="200.0" prefWidth="447.0">
          <columns>
             <TableColumn fx:id="colunaIdProd" prefWidth="48.000030517578125" text="ID" />
@@ -27,22 +27,22 @@
             <TableColumn fx:id="colunaValor" prefWidth="61.0" text="Valor" />
          </columns>
       </TableView>
-      <Button layoutX="502.0" layoutY="122.0" mnemonicParsing="false" onAction="#calcular" prefHeight="25.0" prefWidth="138.0" text="Calcular Valor Total " />
-      <TableView fx:id="tabelaCliente" layoutX="30.0" layoutY="341.0" prefHeight="200.0" prefWidth="330.0">
+      <Button layoutX="272.0" layoutY="317.0" mnemonicParsing="false" onAction="#calcular" prefHeight="25.0" prefWidth="138.0" text="Calcular Valor Total " />
+      <TableView fx:id="tabelaCliente" layoutX="531.0" layoutY="80.0" prefHeight="200.0" prefWidth="447.0">
          <columns>
             <TableColumn fx:id="colunaIdClien" prefWidth="52.000030517578125" text="ID" />
-            <TableColumn fx:id="colunaNome" prefWidth="137.0" text="Nome" />
-            <TableColumn fx:id="colunaSobrenome" prefWidth="143.0" text="Sobrenome" />
+            <TableColumn fx:id="colunaNome" prefWidth="190.0" text="Nome" />
+            <TableColumn fx:id="colunaSobrenome" prefWidth="202.0" text="Sobrenome" />
          </columns>
       </TableView>
-      <TextField fx:id="tfPesquisaCliente" layoutX="40.0" layoutY="306.0" prefHeight="25.0" prefWidth="331.0" promptText="Click para &quot;Pesquisa&quot;" />
-      <Button layoutX="378.0" layoutY="306.0" mnemonicParsing="false" onAction="#pesquisarClie" prefHeight="25.0" prefWidth="99.0" text="Pesquisar" />
-      <Label fx:id="tfCarrinho" layoutX="571.0" layoutY="373.0" prefHeight="115.0" prefWidth="417.0" />
-      <Button fx:id="Carrinho" layoutX="631.0" layoutY="209.0" mnemonicParsing="false" onAction="#Carrinho" prefHeight="39.0" prefWidth="138.0" text="Adicionar no Carrinho" />
-      <DatePicker fx:id="dtData" layoutX="818.0" layoutY="76.0" />
-      <Label layoutX="715.0" layoutY="80.0" prefHeight="17.0" prefWidth="91.0" text="Data da Compra" />
-      <TextField fx:id="tfValorTotal" layoutX="585.0" layoutY="168.0" prefHeight="25.0" prefWidth="72.0" />
-      <Label layoutX="732.0" layoutY="318.0" prefHeight="25.0" prefWidth="148.0" text="Carrinho">
+      <TextField fx:id="tfPesquisaCliente" layoutX="530.0" layoutY="42.0" prefHeight="25.0" prefWidth="331.0" promptText="Click para &quot;Pesquisa&quot;" />
+      <Button layoutX="876.0" layoutY="42.0" mnemonicParsing="false" onAction="#pesquisarClie" prefHeight="25.0" prefWidth="99.0" text="Pesquisar" />
+      <Label fx:id="tfCarrinho" layoutX="517.0" layoutY="364.0" prefHeight="115.0" prefWidth="417.0" />
+      <Button fx:id="Carrinho" layoutX="116.0" layoutY="469.0" mnemonicParsing="false" onAction="#Carrinho" prefHeight="39.0" prefWidth="138.0" text="Adicionar no Carrinho" />
+      <DatePicker fx:id="dtData" layoutX="185.0" layoutY="409.0" />
+      <Label layoutX="68.0" layoutY="413.0" prefHeight="17.0" prefWidth="91.0" text="Data da Compra" />
+      <TextField fx:id="tfValorTotal" disable="true" layoutX="182.0" layoutY="366.0" prefHeight="25.0" prefWidth="72.0" />
+      <Label layoutX="660.0" layoutY="319.0" prefHeight="25.0" prefWidth="148.0" text="Carrinho">
          <font>
             <Font size="31.0" />
          </font>

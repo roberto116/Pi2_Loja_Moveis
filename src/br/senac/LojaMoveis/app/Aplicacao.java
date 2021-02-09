@@ -20,11 +20,17 @@ import javafx.stage.Stage;
 public class Aplicacao extends Application{
     
     // inicializando aplicação
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String []args){
         launch(args);
     }
     
     //tela que sera iniciada assim q executar o programa
+    @Override
     public void start (Stage stage) throws IOException{
         URL url = getClass().getResource("/br/senac/LojaMoveis/telas/TelaInicial.fxml");
         

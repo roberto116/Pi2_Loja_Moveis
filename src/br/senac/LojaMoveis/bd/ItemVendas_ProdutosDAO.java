@@ -9,6 +9,9 @@ import br.senac.LojaMoveis.registros.Vendas_Produtos;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -39,6 +42,42 @@ public class ItemVendas_ProdutosDAO {
             //fechando conexão com o bd
             conexao.close();
         }
-
     }
+    
+    public static List<Vendas_Produtos> pesquisar() throws Exception{
+        //Comando SQL para consultar um determinado registro
+        String sql = "SELECT * FROM produto WHERE produto LIKE ?";
+        
+        //criando conexão com o bd
+        Connection conexao = ConnectionUtils.getConnection();
+        //criando uma lista com o parametro 'Produto'
+        List<Vendas_Produtos> lista = new ArrayList();
+        
+        try{
+            //preparando o comando sql
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            ResultSet dados = comando.executeQuery();
+            
+            //Enquando tiver dados sera executado
+            while(dados.next()){
+                //instanciando 'Produto'
+                Vendas_Produtos item = new Vendas_Produtos();
+                
+                //dados que serão consultados 
+                item.idProduto = dados.getInt("idProduto");
+                item.quantidade = dados.getInt("quantidade");
+                item.total = dados.getDouble("total");
+                // adicionando na lista
+                lista.add(item);
+                
+            }
+            
+        }finally{
+            //fechando conexão com o bd
+            conexao.close();
+        }
+        //retornando lista
+        return lista;
+    }
+    
 }
